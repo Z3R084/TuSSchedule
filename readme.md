@@ -1,1 +1,1 @@
-Helo, this is the repository entry point.
+Hello, this is the repository entry point.
