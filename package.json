@@ -3,7 +3,11 @@
   "version": "0.0.1",
   "description": "Tournament schedule with love",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "ng": "ng",
+    "start": "ng serve",
+    "test": "ng test",
+    "lint": "tslint ./src/**/*.ts -t verbose",
+    "e2e": "ng e2e"
   },
   "repository": {
     "type": "git",
