@@ -9,9 +9,9 @@ const app = express();
 app.use(bodyParser.json());
 
 app.use(function(req, res, next) {
-    //res.header('Access-Control-Allow-Origin', 'http://localhost:4200');
-    //res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    //res.header('Access-Control-Allow-Methods', 'POST');
+    res.header('Access-Control-Allow-Origin', 'http://localhost:4200');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    res.header('Access-Control-Allow-Methods', 'POST');
     next();
 });
 
@@ -20,7 +20,8 @@ app.post('/', (req, res) => {
     fs.writeFile('json.json', JSON.stringify(req.body), (err) => {
         if (err) throw err;
         console.log('File written to json.json');
-        res.send('File written to json.json');
+        res.json(req.body);
+        // res.send('File written to json.json');
     })
 });
 

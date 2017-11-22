@@ -15,12 +15,13 @@ const httpOptions = {
 export class MemoryService {
   constructor(private http: HttpClient) { }
 
-  addJson(team: Team) {
+  addJson(team: Team): Observable<Team> {
     console.log('addJson');
-    this.http.post<Team>('http://localhost:3000', team, httpOptions).pipe(
+    return this.http.post<Team>('http://localhost:3000', team, httpOptions).pipe(
       tap((team: Team) => this.log(`added team w/ id=${team.id}`)),
       catchError(this.handleError<Team>('addJson'))
     );
+    // this.http.post('http://localhost:3000', team, httpOptions).subscribe();
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

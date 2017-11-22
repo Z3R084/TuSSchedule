@@ -16,6 +16,8 @@ export class AdminComponent {
       name: 'TuS'
     };
 
-    this.memoryService.addJson(team);  
+    this.memoryService.addJson(team).subscribe(t => {
+      console.log(t);
+    });
   }
  }
