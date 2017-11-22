@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -11,6 +12,7 @@ import { StandingsComponent } from './standings/standings.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { AdminComponent } from './admin/admin.component';
 import { TeamsComponent } from './admin/teams/teams.component';
+import { ModeComponent } from './admin/mode/mode.component';
 
 import { MemoryService } from './memory.service';
 import { TournamentService } from './services/tournament.service';
@@ -18,6 +20,7 @@ import { TournamentService } from './services/tournament.service';
 @NgModule({
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     AppRoutingModule,
     HttpClientModule
@@ -28,7 +31,8 @@ import { TournamentService } from './services/tournament.service';
     StandingsComponent,
     ScheduleComponent,
     AdminComponent,
-    TeamsComponent
+    TeamsComponent,
+    ModeComponent
   ],
   providers: [
     MemoryService,

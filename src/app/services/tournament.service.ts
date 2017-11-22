@@ -11,7 +11,7 @@ export class TournamentService {
     this.tournament.name = name;
   }
 
-  getTournament() {
+  getTournament(): Tournament {
     return this.tournament;
   }
 }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { TournamentService } from '../../services/tournament.service';
 import { Tournament } from '../../models/tournament';
@@ -11,7 +12,7 @@ import { Team } from '../../models/team';
 export class TeamsComponent {
   tournament: Tournament;
 
-  constructor(private tournamentService: TournamentService) {
+  constructor(private tournamentService: TournamentService, private route: Router) {
     this.tournament = tournamentService.getTournament();
     if (!this.tournament.teams) {
       this.tournament.teams = [new Team()];
@@ -20,5 +21,10 @@ export class TeamsComponent {
 
   addTeam() {
     this.tournament.teams.push(new Team());
+  }
+
+  add() {
+    console.log(this.tournament);
+    this.route.navigate(['/admin/mode']);
   }
 }
