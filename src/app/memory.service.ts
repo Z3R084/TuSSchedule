@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { catchError, map, tap } from 'rxjs/operators';
 
-import { Team } from './team';
+import { Team } from './models/team';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -18,7 +18,7 @@ export class MemoryService {
   addJson(team: Team): Observable<Team> {
     console.log('addJson');
     return this.http.post<Team>('http://localhost:3000', team, httpOptions).pipe(
-      tap((team: Team) => this.log(`added team w/ id=${team.id}`)),
+      tap((team: Team) => this.log(`added team w/ id=${team.name}`)),
       catchError(this.handleError<Team>('addJson'))
     );
     // this.http.post('http://localhost:3000', team, httpOptions).subscribe();

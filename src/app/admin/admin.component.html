@@ -14,6 +14,18 @@
   </div>
 </div> -->
 <div class="container">
-  <h2>Teams hinzufügen</h2>
-  <button type="button" class="btn btn-outline-primary" (click)="test()">Place json</button>
+  <h2>Turnier erstellen</h2>
+  <form>
+    <div class="form-group row">
+      <label for="inputName" class="col-sm-2 col-form-label">Turniername</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="inputName" #inputName />
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-12">
+        <button type="button" class="btn btn-outline-primary float-right" (click)="add(inputName.value)">Weiter</button>
+      </div>
+    </div>
+  </form>
 </div>

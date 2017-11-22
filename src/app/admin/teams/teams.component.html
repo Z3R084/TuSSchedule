@@ -1,0 +1,19 @@
+<div class="container">
+  <h2>{{ tournament.name }} - Mannschaften</h2>
+  <form>
+    <div class="form-group row" *ngFor="let team of tournament.teams; index as i">
+      <label class="col-sm-2 col-label-form">Mannschaft {{ i + 1 }}</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" [(ngModel)]="team.name" [ngModelOptions]="{standalone: true}" />
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-6">
+        <button type="button" class="btn btn-primary" (click)="addTeam()">Mannschaft hinzufügen</button>
+      </div>
+      <div class="col-sm-6">
+        <button type="button" class="btn btn-outline-primary float-right">Weiter</button>
+      </div>
+    </div>
+  </form>
+</div>

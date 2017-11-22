@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -10,12 +10,15 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { StandingsComponent } from './standings/standings.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { AdminComponent } from './admin/admin.component';
+import { TeamsComponent } from './admin/teams/teams.component';
+
 import { MemoryService } from './memory.service';
+import { TournamentService } from './services/tournament.service';
 
 @NgModule({
   imports: [
     BrowserModule,
-    CommonModule,
+    FormsModule,
     AppRoutingModule,
     HttpClientModule
   ],
@@ -24,9 +27,13 @@ import { MemoryService } from './memory.service';
     DashboardComponent,
     StandingsComponent,
     ScheduleComponent,
-    AdminComponent
+    AdminComponent,
+    TeamsComponent
   ],
-  providers: [MemoryService],
+  providers: [
+    MemoryService,
+    TournamentService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

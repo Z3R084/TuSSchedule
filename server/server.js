@@ -20,13 +20,13 @@ app.use(function (req, res, next) {
 const adapter = new FileAsync('db.json');
 low(adapter).then(db => {
 
-  app.post('/', (req, res) => {
+  app.post('/tournament', (req, res) => {
     console.log('Received request');
     db.get('teams')
       .push(req.body)
       .last()
       .write()
-      .then(team => res.json(team));
+      .then(tournament => res.json(tournament));
     // fs.writeFile('json.json', JSON.stringify(req.body), (err) => {
     //   if (err) throw err;
     //   console.log('File written to json.json');
@@ -34,7 +34,7 @@ low(adapter).then(db => {
     // })
   });
 
-  return db.defaults({ teams: [] }).write();
+  return db.defaults({ tournament: [] }).write();
 }).then(() => {
 
   app.listen(3000, () => {

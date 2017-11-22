@@ -1,23 +1,18 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
-import { MemoryService } from '../memory.service';
-import { Team } from '../team';
+import { TournamentService } from '../services/tournament.service';
+import { Team } from '../models/team';
 
 @Component({
   selector: 'tus-admin',
   templateUrl: 'admin.component.html'
 })
 export class AdminComponent {
-  constructor(private memoryService: MemoryService) {}
+  constructor(private tournamentService: TournamentService, private route: Router) {}
 
-  test(): void {
-    const team: Team = {
-      id: 1,
-      name: 'TuS'
-    };
-
-    this.memoryService.addJson(team).subscribe(t => {
-      console.log(t);
-    });
+  add(name: string) {
+    this.tournamentService.addTournament(name);
+    this.route.navigate(['/admin/teams']);
   }
  }
