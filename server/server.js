@@ -20,9 +20,15 @@ app.use(function (req, res, next) {
 const adapter = new FileAsync('db.json');
 low(adapter).then(db => {
 
+  app.get('/tournament', (req, res) => {
+    console.log('data send');
+    const tournament = db.get('tournament').last().value();
+    res.send(tournament);
+  });
+
   app.post('/tournament', (req, res) => {
     console.log('Received request');
-    db.get('teams')
+    db.get('tournament')
       .push(req.body)
       .last()
       .write()

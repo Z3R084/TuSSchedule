@@ -1,5 +1,6 @@
 <div class="container">
   <h2>{{ tournament.name }} - Mannschaften</h2>
+  <hr />
   <form>
     <div class="form-group row" *ngFor="let team of tournament.teams; index as i">
       <label class="col-sm-2 col-label-form">Mannschaft {{ i + 1 }}</label>

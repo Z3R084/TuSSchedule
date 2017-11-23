@@ -1,8 +1,15 @@
 {
-  "teams": [
+  "tournament": [
     {
-      "id": 1,
-      "name": "TuS"
+      "name": "Mein Turnier",
+      "teams": [
+        {
+          "name": "a"
+        },
+        {
+          "name": "s"
+        }
+      ]
     }
   ]
 }

@@ -1,5 +1,8 @@
 export class Team {
   league?: number;
+  name: string;
 
-  constructor(public name: string = '') { }
+  constructor() {
+    this.name = '';
+  }
 }

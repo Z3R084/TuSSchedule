@@ -28,8 +28,7 @@ export class ModeComponent {
   }
 
   create() {
-    console.log(this.tournament);
-    this.tournament.teams[0].league = 2;
+    this.tournamentService.addTournamentDb(this.tournament).subscribe();
   }
 
   private setLeagueTeam() {

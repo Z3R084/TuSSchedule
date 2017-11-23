@@ -1,5 +1,6 @@
 <div class="container">
   <h2>{{ tournament.name }} - Modus</h2>
+  <hr />
   <form>
     <div class="form-row align-items-center">
       <div class="col-sm-2">
@@ -32,9 +33,23 @@
             <span class="custom-control-description">Hin- und Rückspiel</span>
           </label>
         </div>
+        <div class="col-sm-2 offset-sm-2">
+          <label class="custom-control custom-radio">
+            <input type="radio" class="custom-control-input" name="radioGame" />
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description">Halbfinale/Finale</span>
+          </label>
+        </div>
         <div class="col-sm-2">
-          <label class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" />
+          <label class="custom-control custom-radio">
+            <input type="radio" class="custom-control-input" name="radioGame" />
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description">Finale</span>
+          </label>
+        </div>
+        <div class="col-sm-2">
+          <label class="custom-control custom-radio">
+            <input type="radio" class="custom-control-input" name="radioGame" />
             <span class="custom-control-indicator"></span>
             <span class="custom-control-description">Platzierungsspiele</span>
           </label>

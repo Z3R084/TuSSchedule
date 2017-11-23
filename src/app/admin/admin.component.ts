@@ -1,15 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { TournamentService } from '../services/tournament.service';
-import { Team } from '../models/team';
+import { Tournament } from '../models/tournament';
 
 @Component({
   selector: 'tus-admin',
   templateUrl: 'admin.component.html'
 })
-export class AdminComponent {
-  constructor(private tournamentService: TournamentService, private route: Router) {}
+export class AdminComponent implements OnInit {
+  tournament: Tournament = new Tournament();
+
+  constructor(private tournamentService: TournamentService, private route: Router) { }
+
+  ngOnInit() {
+    this.tournamentService.getTournamentDb().subscribe(tournament =>this.tournament = tournament);
+  }
 
   add(name: string) {
     if (!name) {
