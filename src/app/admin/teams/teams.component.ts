@@ -26,4 +26,8 @@ export class TeamsComponent {
   add() {
     this.route.navigate(['/admin/mode']);
   }
+
+  delete(team: Team){
+    this.tournament.teams.splice(this.tournament.teams.indexOf(team), 1);
+  }
 }
