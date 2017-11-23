@@ -24,7 +24,6 @@ export class TeamsComponent {
   }
 
   add() {
-    console.log(this.tournament);
     this.route.navigate(['/admin/mode']);
   }
 }

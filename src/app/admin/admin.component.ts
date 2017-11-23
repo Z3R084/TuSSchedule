@@ -12,6 +12,9 @@ export class AdminComponent {
   constructor(private tournamentService: TournamentService, private route: Router) {}
 
   add(name: string) {
+    if (!name) {
+      name = 'Mein Turnier';
+    }
     this.tournamentService.addTournament(name);
     this.route.navigate(['/admin/teams']);
   }

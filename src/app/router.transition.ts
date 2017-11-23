@@ -2,7 +2,7 @@ import { trigger, animate, style, group, animateChild, query, stagger, transitio
 
 export const routerTransition = trigger('routerTransition', [
   transition('* <=> *', [
-    query(':enter, :leave', style({ position: 'fixed', width: '100%' })
+    query(':enter, :leave', style({ position: 'fixed', width: '100%', opacity: '1' })
       , { optional: true }),
     group([
       query(':enter', [
