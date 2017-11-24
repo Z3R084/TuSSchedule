@@ -31,10 +31,14 @@ export class ModeComponent {
     this.tournamentService.addTournamentDb(this.tournament).subscribe();
   }
 
+  update() {
+    this.tournamentService.updateTournamentDb(this.tournament).subscribe();
+  }
+
   private setLeagueTeam() {
     const add = Math.round(this.tournament.teams.length / this.leagues.length);
     let index = 0;
-    for(let i = 0; i < this.tournament.teams.length; i++) {
+    for (let i = 0; i < this.tournament.teams.length; i++) {
       if (i % add === 0 && i > 0) {
         index += 1;
       }

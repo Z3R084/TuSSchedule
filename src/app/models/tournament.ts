@@ -1,10 +1,8 @@
 import { Team } from './team';
 
 export class Tournament {
-  name: string;
   teams?: Team[];
+  oldName?: string;
 
-  constructor() {
-    this.name = '';
-   }
+  constructor(public name: string = '') { }
 }

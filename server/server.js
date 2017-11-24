@@ -5,10 +5,12 @@ const fs = require('fs');
 const bodyParser = require('body-parser');
 const express = require('express');
 const low = require('lowdb');
+const cors = require('cors');
 const FileAsync = require('lowdb/adapters/FileAsync');
 
 const app = express();
 app.use(bodyParser.json());
+app.use(cors());
 
 app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', 'http://localhost:4200');
@@ -33,14 +35,18 @@ low(adapter).then(db => {
       .last()
       .write()
       .then(tournament => res.json(tournament));
-    // fs.writeFile('json.json', JSON.stringify(req.body), (err) => {
-    //   if (err) throw err;
-    //   console.log('File written to json.json');
-    //   res.json(req.body);
-    // })
   });
 
-  return db.defaults({ tournament: [] }).write();
+  app.put('/tournament/:tournament', (req, res) => {
+    console.log('Received update');
+    db.get('tournament')
+      .find({ name: req.params.tournament })
+      .assign(req.body)
+      .write()
+      .then(tournament => res.json(tournament));
+  });
+
+  return db.defaults({ tournament: {} }).write();
 }).then(() => {
 
   app.listen(3000, () => {

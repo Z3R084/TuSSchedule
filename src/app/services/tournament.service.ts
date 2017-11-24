@@ -28,8 +28,18 @@ export class TournamentService {
 
   getTournamentDb(): Observable<Tournament> {
     return this.http.get<Tournament>('http://localhost:3000/tournament').pipe(
-      tap(t => this.log(`fetched tournament`)),
+      tap(t => {
+        this.log(`fetched tournament`);
+        this.tournament = t;
+      }),
       catchError(this.handleError<Tournament>('getTournament'))
+    );
+  }
+
+  updateTournamentDb(tournament: Tournament): Observable<any> {
+    return this.http.put(`http://localhost:3000/tournament/${tournament.oldName}`, tournament, httpOptions).pipe(
+      tap(_ => this.log(`updated tournament ${tournament.name}`)),
+      catchError(this.handleError<any>('updateTournament'))
     );
   }
 

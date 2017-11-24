@@ -9,19 +9,21 @@ import { Tournament } from '../models/tournament';
   templateUrl: 'admin.component.html'
 })
 export class AdminComponent implements OnInit {
-  tournament: Tournament = new Tournament();
+  tournament: Tournament;
 
-  constructor(private tournamentService: TournamentService, private route: Router) { }
+  constructor(private tournamentService: TournamentService, private route: Router) {
+    this.tournament = tournamentService.getTournament();
+   }
 
   ngOnInit() {
-    this.tournamentService.getTournamentDb().subscribe(tournament =>this.tournament = tournament);
+    this.tournamentService.getTournamentDb().subscribe(tournament => {
+      this.tournament = tournament
+      this.tournament.oldName = tournament.name;
+    });
   }
 
-  add(name: string) {
-    if (!name) {
-      name = 'Mein Turnier';
-    }
-    this.tournamentService.addTournament(name);
+  add() {
+    // this.tournamentService.addTournament(name);
     this.route.navigate(['/admin/teams']);
   }
  }

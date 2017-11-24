@@ -1,15 +1,3 @@
 {
-  "tournament": [
-    {
-      "name": "Mein Turnier",
-      "teams": [
-        {
-          "name": "a"
-        },
-        {
-          "name": "s"
-        }
-      ]
-    }
-  ]
+  "tournament": {}
 }
