@@ -24,7 +24,10 @@ low(adapter).then(db => {
 
   app.get('/tournament', (req, res) => {
     console.log('data send');
-    const tournament = db.get('tournament').last().value();
+    let tournament = db.get('tournament').last().value();
+    if (!tournament) {
+      tournament = {};
+    }
     res.send(tournament);
   });
 
@@ -46,7 +49,7 @@ low(adapter).then(db => {
       .then(tournament => res.json(tournament));
   });
 
-  return db.defaults({ tournament: {} }).write();
+  return db.defaults({ tournament: [] }).write();
 }).then(() => {
 
   app.listen(3000, () => {

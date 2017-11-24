@@ -13,12 +13,12 @@ export class AdminComponent implements OnInit {
 
   constructor(private tournamentService: TournamentService, private route: Router) {
     this.tournament = tournamentService.getTournament();
-   }
+  }
 
   ngOnInit() {
     this.tournamentService.getTournamentDb().subscribe(tournament => {
-      this.tournament = tournament
-      this.tournament.oldName = tournament.name;
+        this.tournament = tournament
+        this.tournament.oldName = tournament.name;
     });
   }
 
@@ -26,4 +26,4 @@ export class AdminComponent implements OnInit {
     // this.tournamentService.addTournament(name);
     this.route.navigate(['/admin/teams']);
   }
- }
+}

@@ -10,21 +10,21 @@
           </label>
         </div> -->
         <label class="custom-control custom-radio">
-          <input id="radioLeague" type="radio" name="radioMode" class="custom-control-input" [(ngModel)]="mode" value="league" />
+          <input id="radioLeague" type="radio" name="radioMode" class="custom-control-input" [(ngModel)]="tournament.mode" value="league" />
           <span class="custom-control-indicator"></span>
           <span class="custom-control-description">Liga</span>
         </label>
       </div>
       <div class="col-sm-2">
         <label class="custom-control custom-radio">
-          <input id="radioTournament" type="radio" name="radioMode" class="custom-control-input" [(ngModel)]="mode" value="tournament"
+          <input id="radioTournament" type="radio" name="radioMode" class="custom-control-input" [(ngModel)]="tournament.mode" value="tournament"
           />
           <span class="custom-control-indicator"></span>
           <span class="custom-control-description">Turnier</span>
         </label>
       </div>
     </div>
-    <div *ngIf="mode === 'league'">
+    <div *ngIf="tournament.mode === 'league'">
       <div class="form-row align-items-center">
         <div class="col-sm-2">
           <label class="custom-control custom-checkbox">
@@ -76,10 +76,10 @@
     </div>
     <div class="form-group row">
       <div class="col-sm-12">
-        <button type="button" class="btn btn-outline-primary float-right" [disabled]="mode === null" (click)="create()" *ngIf="!tournament.oldName">
+        <button type="button" class="btn btn-outline-primary float-right" [disabled]="!tournament.mode" (click)="create()" *ngIf="!tournament.oldName">
           Turnier erstellen
         </button>
-        <button type="button" class="btn btn-outline-primary float-right" [disabled]="mode === null" (click)="update()" *ngIf="tournament.oldName">
+        <button type="button" class="btn btn-outline-primary float-right" [disabled]="!tournament.mode" (click)="update()" *ngIf="tournament.oldName">
           Turnier aktualisieren
         </button>
       </div>

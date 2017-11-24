@@ -24,6 +24,10 @@ export class ModeComponent {
     }
     if (this.leagues.length > 1) {
       this.setLeagueTeam();
+    } else if (this.leagues.length === 1) {
+      for (let team of this.tournament.teams) {
+        team.league = 1;
+      }
     }
   }
 

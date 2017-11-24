@@ -1,3 +1,19 @@
 {
-  "tournament": {}
+  "tournament": [
+    {
+      "name": "test",
+      "teams": [
+        {
+          "name": "a",
+          "league": 1
+        },
+        {
+          "name": "c",
+          "league": 1
+        }
+      ],
+      "oldName": "test",
+      "mode": "league"
+    }
+  ]
 }
