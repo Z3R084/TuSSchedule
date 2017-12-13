@@ -10,6 +10,7 @@ import { Tournament } from '../models/tournament';
 })
 export class AdminComponent implements OnInit {
   tournament: Tournament;
+  dbError: string = '';
 
   constructor(private tournamentService: TournamentService, private route: Router) {
     this.tournament = tournamentService.getTournament();
@@ -17,8 +18,12 @@ export class AdminComponent implements OnInit {
 
   ngOnInit() {
     this.tournamentService.getTournamentDb().subscribe(tournament => {
-        this.tournament = tournament
-        this.tournament.oldName = tournament.name;
+      if (!tournament) {
+        this.dbError = 'Connecting to database failed... Check if nodejs serve is running.';
+        return;
+      }
+      this.tournament = tournament
+      this.tournament.oldName = tournament.name;
     });
   }
 

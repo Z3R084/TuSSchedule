@@ -16,7 +16,7 @@
 <div class="container">
   <h2>Turnier erstellen</h2>
   <hr />
-  <form>
+  <form *ngIf="dbError.length === 0">
     <div class="form-group row">
       <label for="inputName" class="col-sm-2 col-form-label">Turniername</label>
       <div class="col-sm-10">
@@ -29,4 +29,7 @@
       </div>
     </div>
   </form>
+  <div *ngIf="dbError.length > 0" class="alert alert-danger">
+    {{ dbError }}
+  </div>
 </div>
