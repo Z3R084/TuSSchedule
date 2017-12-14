@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
+import * as shuffle from 'shuffle-array';
 
 import { TournamentService } from '../../services/tournament.service';
 import { Tournament } from '../../models/tournament';
 import { Team } from '../../models/team';
+import { Schedule } from '../../models/schedule';
 
 @Component({
   selector: 'tus-mode',
@@ -10,8 +12,8 @@ import { Team } from '../../models/team';
 })
 export class ModeComponent {
   tournament: Tournament;
-  mode: string = null;
   leagues: Array<number> = [];
+  secondRound: boolean = false;
 
   constructor(private tournamentService: TournamentService) {
     this.tournament = tournamentService.getTournament();
@@ -33,7 +35,7 @@ export class ModeComponent {
   }
 
   create() {
-    if (this.mode === 'league') {
+    if (this.tournament.mode === 'league') {
       this.generateRoundRobinTournamentSchedule();
     } else {
       this.generateKoTournamentSchedule();
@@ -45,9 +47,13 @@ export class ModeComponent {
     this.tournamentService.updateTournamentDb(this.tournament).subscribe();
   }
 
-  private generateRoundRobinTournamentSchedule() {
-    let schedule = [];
-    const teams = this.tournament.teams.filter((team, index) => {
+  private generateRoundRobinTournamentSchedule(teams?: any) {
+    // let schedule: Schedule[] = [];
+    if (!this.tournament.schedule) {
+      this.tournament.schedule = [];
+    }
+  
+    teams = teams || this.tournament.teams.filter((team, index) => {
       return team.league === 1;
     });
 
@@ -60,13 +66,21 @@ export class ModeComponent {
     const rounds = teams.length - 1;
     
     for (let i = 0; i < rounds; i++) {
-      schedule[i] = [];
+      //schedule[i] = [];
       for (let j = 0; j < teams.length / 2; j++) {
-        schedule[i].push([teams[j].name, teams[rounds - j].name]);
+        // schedule[i].push([teams[j].name, teams[rounds - j].name]);
+        this.tournament.schedule.push(new Schedule(teams[j].name, teams[rounds - j].name));
       }
       teams.splice(1, 0, teams.pop());
     }
-    console.log(schedule);
+    //this.tournament.schedule.push(schedule);
+    console.log(this.tournament.schedule);
+    
+    if (this.secondRound === true) {
+      this.secondRound = false;
+      teams = shuffle(teams);
+      this.generateRoundRobinTournamentSchedule(teams);
+    }
   }
 
   private generateKoTournamentSchedule() {
