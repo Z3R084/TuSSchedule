@@ -6,6 +6,7 @@ export class Tournament {
   oldName?: string;
   mode?: string;
   schedule?: Schedule[];
+  classificationMode?: string;
 
   constructor(public name: string = '', public secondRound: boolean = false) { }
 }

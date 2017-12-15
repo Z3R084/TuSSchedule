@@ -35,21 +35,21 @@
         </div>
         <div class="col-sm-2 offset-sm-2">
           <label class="custom-control custom-radio">
-            <input type="radio" class="custom-control-input" name="radioGame" />
+            <input type="radio" class="custom-control-input" name="radioGame" [(ngModel)]="tournament.classificationMode" value="semifinal" />
             <span class="custom-control-indicator"></span>
             <span class="custom-control-description">Halbfinale/Finale</span>
           </label>
         </div>
         <div class="col-sm-2">
           <label class="custom-control custom-radio">
-            <input type="radio" class="custom-control-input" name="radioGame" />
+            <input type="radio" class="custom-control-input" name="radioGame" [(ngModel)]="tournament.classificationMode" value="final" />
             <span class="custom-control-indicator"></span>
             <span class="custom-control-description">Finale</span>
           </label>
         </div>
         <div class="col-sm-2">
           <label class="custom-control custom-radio">
-            <input type="radio" class="custom-control-input" name="radioGame" />
+            <input type="radio" class="custom-control-input" name="radioGame" [(ngModel)]="tournament.classificationMode" value="tournament" />
             <span class="custom-control-indicator"></span>
             <span class="custom-control-description">Platzierungsspiele</span>
           </label>
