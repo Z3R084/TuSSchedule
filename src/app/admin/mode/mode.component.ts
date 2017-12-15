@@ -13,7 +13,6 @@ import { Schedule } from '../../models/schedule';
 export class ModeComponent {
   tournament: Tournament;
   leagues: Array<number> = [];
-  secondRound: boolean = false;
 
   constructor(private tournamentService: TournamentService) {
     this.tournament = tournamentService.getTournament();
@@ -35,19 +34,27 @@ export class ModeComponent {
   }
 
   create() {
+    this.generateSchedule();
+    this.tournamentService.addTournamentDb(this.tournament).subscribe();
+  }
+
+  update() {
+    if (this.tournament.schedule) {
+      this.tournament.schedule.length = 0;
+    }
+    this.generateSchedule();
+    this.tournamentService.updateTournamentDb(this.tournament).subscribe();
+  }
+
+  private generateSchedule(): void {
     if (this.tournament.mode === 'league') {
       this.generateRoundRobinTournamentSchedule();
     } else {
       this.generateKoTournamentSchedule();
     }
-    // this.tournamentService.addTournamentDb(this.tournament).subscribe();
   }
 
-  update() {
-    this.tournamentService.updateTournamentDb(this.tournament).subscribe();
-  }
-
-  private generateRoundRobinTournamentSchedule(teams?: any) {
+  private generateRoundRobinTournamentSchedule(teams?: any, cancel?: boolean) {
     // let schedule: Schedule[] = [];
     if (!this.tournament.schedule) {
       this.tournament.schedule = [];
@@ -73,13 +80,10 @@ export class ModeComponent {
       }
       teams.splice(1, 0, teams.pop());
     }
-    //this.tournament.schedule.push(schedule);
-    console.log(this.tournament.schedule);
     
-    if (this.secondRound === true) {
-      this.secondRound = false;
+    if (this.tournament.secondRound === true && (!cancel)) {
       teams = shuffle(teams);
-      this.generateRoundRobinTournamentSchedule(teams);
+      this.generateRoundRobinTournamentSchedule(teams, true);
     }
   }
 

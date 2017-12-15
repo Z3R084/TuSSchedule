@@ -7,5 +7,5 @@ export class Tournament {
   mode?: string;
   schedule?: Schedule[];
 
-  constructor(public name: string = '') { }
+  constructor(public name: string = '', public secondRound: boolean = false) { }
 }
