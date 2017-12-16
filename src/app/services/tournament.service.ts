@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Tournament } from '../models/tournament';
+import { MessageService } from '../services/message.service';
+
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { catchError, map, tap } from 'rxjs/operators';
@@ -13,7 +15,7 @@ const httpOptions = {
 @Injectable()
 export class TournamentService {
   private tournament = new Tournament();
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private messageService: MessageService) { }
 
   addTournament(name: string) {
     this.tournament.name = name;
@@ -52,7 +54,7 @@ export class TournamentService {
   }
 
   private log(message: string) {
-    console.log(`MessageService: ${message}`);
+    this.messageService.add('tournamentService: '+ message);
   }
 
   getTournament(): Tournament {

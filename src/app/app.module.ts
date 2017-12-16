@@ -13,9 +13,11 @@ import { ScheduleComponent } from './schedule/schedule.component';
 import { AdminComponent } from './admin/admin.component';
 import { TeamsComponent } from './admin/teams/teams.component';
 import { ModeComponent } from './admin/mode/mode.component';
+import { MessagesComponent } from './messages/messages.component';
 
 import { MemoryService } from './memory.service';
 import { TournamentService } from './services/tournament.service';
+import { MessageService } from './services/message.service';
 
 @NgModule({
   imports: [
@@ -32,11 +34,13 @@ import { TournamentService } from './services/tournament.service';
     ScheduleComponent,
     AdminComponent,
     TeamsComponent,
-    ModeComponent
+    ModeComponent,
+    MessagesComponent
   ],
   providers: [
     MemoryService,
-    TournamentService
+    TournamentService,
+    MessageService
   ],
   bootstrap: [AppComponent]
 })
