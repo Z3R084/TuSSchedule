@@ -49,6 +49,15 @@ low(adapter).then(db => {
       .then(tournament => res.json(tournament));
   });
 
+  app.put('/schedule/:tournament', (req, res) => {
+    console.log('Received schedule update');
+    db.get('tournament')
+      .find({ name: req.params.tournament })
+      .assign({ schedule: req.body })
+      .write()
+      .then(tournament => res.json(tournament));
+  });
+
   return db.defaults({ tournament: [] }).write();
 }).then(() => {
 

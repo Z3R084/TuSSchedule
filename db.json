@@ -21,18 +21,19 @@
         }
       ],
       "mode": "league",
+      "secondRound": true,
       "schedule": [
         {
           "team1": "aa",
           "team2": "dd",
-          "goals1": 0,
-          "goals2": 0
+          "goals1": "4",
+          "goals2": "6"
         },
         {
           "team1": "bb",
           "team2": "cc",
-          "goals1": 0,
-          "goals2": 0
+          "goals1": "3",
+          "goals2": "5"
         },
         {
           "team1": "aa",
@@ -65,39 +66,36 @@
           "goals2": 0
         },
         {
-          "team1": "bb",
-          "team2": "aa",
+          "team1": "aa",
+          "team2": "bb",
           "goals1": 0,
           "goals2": 0
         },
         {
           "team1": "cc",
-          "team2": "aa",
+          "team2": "bb",
           "goals1": 0,
           "goals2": 0
         },
         {
           "team1": "dd",
-          "team2": "bb",
+          "team2": "aa",
           "goals1": 0,
           "goals2": 0
         },
         {
           "team1": "cc",
-          "team2": "bb",
+          "team2": "aa",
           "goals1": 0,
           "goals2": 0
         },
         {
-          "team1": "aa",
+          "team1": "bb",
           "team2": "dd",
           "goals1": 0,
           "goals2": 0
         }
-      ],
-      "oldName": "test",
-      "secondRound": true,
-      "classificationMode": "semifinal"
+      ]
     }
   ]
 }

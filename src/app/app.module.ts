@@ -13,6 +13,7 @@ import { ScheduleComponent } from './schedule/schedule.component';
 import { AdminComponent } from './admin/admin.component';
 import { TeamsComponent } from './admin/teams/teams.component';
 import { ModeComponent } from './admin/mode/mode.component';
+import { RoundRobinComponent } from './schedule/roundRobin/roundRobin.component';
 import { MessagesComponent } from './messages/messages.component';
 
 import { MemoryService } from './memory.service';
@@ -35,6 +36,7 @@ import { MessageService } from './services/message.service';
     AdminComponent,
     TeamsComponent,
     ModeComponent,
+    RoundRobinComponent,
     MessagesComponent
   ],
   providers: [
