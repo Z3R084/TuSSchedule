@@ -15,6 +15,7 @@ import { Table } from '../../models/table';
 export class ModeComponent {
   tournament: Tournament;
   leagues: Array<number> = [];
+  generateNewSchedule: boolean = false;
 
   constructor(private tournamentService: TournamentService, private route: Router) {
     this.tournament = tournamentService.getTournament();
@@ -42,15 +43,27 @@ export class ModeComponent {
   }
 
   update() {
-    if (this.tournament.schedule) {
-      this.tournament.schedule = [];
+    if (this.generateNewSchedule) {
+      this.generateSchedule();
+    } else {
+      this.updateTeams();
+      console.log(this.tournament.schedule);
     }
-    this.generateSchedule();
-    this.tournamentService.updateTournamentDb(this.tournament).subscribe();
-    this.route.navigate(['/schedule']);
+    // this.tournamentService.updateTournamentDb(this.tournament).subscribe();
+    // this.route.navigate(['/schedule']);
+  }
+
+  private updateTeams(): void {
+    this.tournament.teams.forEach(team => {
+      this.tournament.schedule.filter(schedule => schedule.team1 === team.originalName).forEach(schedule => schedule.team1 = team.name);
+      this.tournament.schedule.filter(schedule => schedule.team2 === team.originalName).forEach(schedule => schedule.team2 = team.name);
+      this.tournament.table.filter(table => table.team === team.originalName).forEach(table => table.team = team.name);
+    });
   }
 
   private generateSchedule(): void {
+    this.tournament.schedule = [];
+
     if (this.tournament.mode === 'league') {
       this.generateRoundRobinTournamentSchedule();
     } else {
@@ -63,11 +76,6 @@ export class ModeComponent {
   }
 
   private generateRoundRobinTournamentSchedule(teams?: any, cancel?: boolean) {
-    // let schedule: Schedule[] = [];
-    if (!this.tournament.schedule) {
-      this.tournament.schedule = [];
-    }
-  
     teams = teams || this.tournament.teams.filter((team, index) => {
       return team.league === 1;
     });
@@ -79,7 +87,7 @@ export class ModeComponent {
     }
 
     const rounds = teams.length - 1;
-    
+
     for (let i = 0; i < rounds; i++) {
       //schedule[i] = [];
       for (let j = 0; j < teams.length / 2; j++) {
@@ -88,7 +96,7 @@ export class ModeComponent {
       }
       teams.splice(1, 0, teams.pop());
     }
-    
+
     if (this.tournament.secondRound === true && (!cancel)) {
       teams = shuffle(teams);
       this.generateRoundRobinTournamentSchedule(teams, true);
@@ -103,8 +111,8 @@ export class ModeComponent {
       const dummy: Team = { name: 'Freilos', league: 1 };
       teams.push(dummy);
     }
-    
-    while(teams.length > 1) {
+
+    while (teams.length > 1) {
       let randomNumber = Math.floor(Math.random() * teams.length)
       const team1 = teams[randomNumber];
       teams.splice(randomNumber, 1);
@@ -114,7 +122,7 @@ export class ModeComponent {
       teams.splice(randomNumber, 1);
     }
     console.log(schedule);
-    
+
   }
 
   private setLeagueTeam() {

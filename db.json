@@ -1,3 +1,101 @@
 {
-  "tournament": []
+  "tournament": [
+    {
+      "name": "test",
+      "teams": [
+        {
+          "name": "aa",
+          "league": 1
+        },
+        {
+          "name": "bb",
+          "league": 1
+        },
+        {
+          "name": "cc",
+          "league": 1
+        },
+        {
+          "name": "dd",
+          "league": 1
+        }
+      ],
+      "mode": "league",
+      "secondRound": true,
+      "schedule": [
+        {
+          "team1": "aa",
+          "team2": "dd",
+          "goals1": 0,
+          "goals2": 0
+        },
+        {
+          "team1": "bb",
+          "team2": "cc",
+          "goals1": 0,
+          "goals2": 0
+        },
+        {
+          "team1": "aa",
+          "team2": "cc",
+          "goals1": 0,
+          "goals2": 0
+        },
+        {
+          "team1": "dd",
+          "team2": "bb",
+          "goals1": 0,
+          "goals2": 0
+        },
+        {
+          "team1": "aa",
+          "team2": "bb",
+          "goals1": 0,
+          "goals2": 0
+        },
+        {
+          "team1": "cc",
+          "team2": "dd",
+          "goals1": 0,
+          "goals2": 0
+        },
+        {
+          "team1": "aa",
+          "team2": "dd",
+          "goals1": 0,
+          "goals2": 0
+        },
+        {
+          "team1": "cc",
+          "team2": "bb",
+          "goals1": 0,
+          "goals2": 0
+        },
+        {
+          "team1": "aa",
+          "team2": "bb",
+          "goals1": 0,
+          "goals2": 0
+        },
+        {
+          "team1": "dd",
+          "team2": "cc",
+          "goals1": 0,
+          "goals2": 0
+        },
+        {
+          "team1": "aa",
+          "team2": "cc",
+          "goals1": 0,
+          "goals2": 0
+        },
+        {
+          "team1": "bb",
+          "team2": "dd",
+          "goals1": 0,
+          "goals2": 0
+        }
+      ]
+    }
+  ]
 }

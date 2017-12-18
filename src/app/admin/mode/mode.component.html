@@ -10,7 +10,8 @@
           </label>
         </div> -->
         <label class="custom-control custom-radio">
-          <input id="radioLeague" type="radio" name="radioMode" class="custom-control-input" [(ngModel)]="tournament.mode" value="league" />
+          <input id="radioLeague" type="radio" name="radioMode" class="custom-control-input" [(ngModel)]="tournament.mode" value="league"
+          />
           <span class="custom-control-indicator"></span>
           <span class="custom-control-description">Liga</span>
         </label>
@@ -35,21 +36,24 @@
         </div>
         <div class="col-sm-2 offset-sm-2">
           <label class="custom-control custom-radio">
-            <input type="radio" class="custom-control-input" name="radioGame" [(ngModel)]="tournament.classificationMode" value="semifinal" />
+            <input type="radio" class="custom-control-input" name="radioGame" [(ngModel)]="tournament.classificationMode" value="semifinal"
+            />
             <span class="custom-control-indicator"></span>
             <span class="custom-control-description">Halbfinale/Finale</span>
           </label>
         </div>
         <div class="col-sm-2">
           <label class="custom-control custom-radio">
-            <input type="radio" class="custom-control-input" name="radioGame" [(ngModel)]="tournament.classificationMode" value="final" />
+            <input type="radio" class="custom-control-input" name="radioGame" [(ngModel)]="tournament.classificationMode" value="final"
+            />
             <span class="custom-control-indicator"></span>
             <span class="custom-control-description">Finale</span>
           </label>
         </div>
         <div class="col-sm-2">
           <label class="custom-control custom-radio">
-            <input type="radio" class="custom-control-input" name="radioGame" [(ngModel)]="tournament.classificationMode" value="tournament" />
+            <input type="radio" class="custom-control-input" name="radioGame" [(ngModel)]="tournament.classificationMode" value="tournament"
+            />
             <span class="custom-control-indicator"></span>
             <span class="custom-control-description">Platzierungsspiele</span>
           </label>
@@ -74,12 +78,23 @@
         </div>
       </div>
     </div>
-    <div class="form-group row">
+    <div class="form-group row" *ngIf="!tournament.oldName">
       <div class="col-sm-12">
-        <button type="button" class="btn btn-outline-primary float-right" [disabled]="!tournament.mode" (click)="create()" *ngIf="!tournament.oldName">
+        <button type="button" class="btn btn-outline-primary float-right" [disabled]="!tournament.mode" (click)="create()">
           Turnier erstellen
         </button>
-        <button type="button" class="btn btn-outline-primary float-right" [disabled]="!tournament.mode" (click)="update()" *ngIf="tournament.oldName">
+      </div>
+    </div>
+    <div class="form-group row" *ngIf="tournament.oldName">
+      <div class="col-sm-6">
+        <label class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" name="cbGenerateSchedule" [(ngModel)]="generateNewSchedule" />
+          <span class="custom-control-indicator"></span>
+          <span class="custom-control-description">Spielplan neu generieren (Es werden alle Ergebnisse gelöscht!)</span>
+        </label>
+      </div>
+      <div class="col-sm-6">
+        <button type="button" class="btn btn-outline-primary float-right" [disabled]="!tournament.mode" (click)="update()">
           Turnier aktualisieren
         </button>
       </div>

@@ -1,13 +1,8 @@
-export interface ITeamAssociation {
-  originalName: string;
-  newName: string;
-}
-
 export class Team {
   league: number;
   name: string;
 
-  constructor() {
+  constructor(public originalName?: string) {
     this.name = '';
     this.league = 1;
   }
