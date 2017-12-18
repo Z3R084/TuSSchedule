@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Tournament } from '../models/tournament';
 import { Schedule } from '../models/schedule';
 import { MessageService } from '../services/message.service';
+import { ITeamAssociation } from '../models/team';
 
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
@@ -19,6 +20,7 @@ export class TournamentService {
   // private tournament = new Tournament();
   private tournament: Observable<Tournament>;
   private _tournament: Tournament = new Tournament();
+  private _teamAssociation: ITeamAssociation[];
 
   constructor(private http: HttpClient, private messageService: MessageService) { }
 
@@ -41,6 +43,9 @@ export class TournamentService {
     if (!this.tournament) {
       this.tournament = this.http.get<Tournament>('http://localhost:3000/tournament').pipe(
         tap(t => {
+          // t.teams.forEach(team => {
+          //   this._teamAssociation.push({ originalName: team.name, newName: team.name });
+          // });
           this._tournament = t;
           return t;
         }),
@@ -50,6 +55,11 @@ export class TournamentService {
       );
     }
     return this.tournament;
+  }
+
+  updateNames(): void {
+    console.log(this._tournament.teams);
+    console.log(this._teamAssociation);
   }
 
   // getTournamentDb(): Observable<Tournament> {

@@ -24,7 +24,8 @@ export class TeamsComponent {
   }
 
   add() {
-    this.route.navigate(['/admin/mode']);
+    this.tournamentService.updateNames();
+    // this.route.navigate(['/admin/mode']);
   }
 
   delete(team: Team){

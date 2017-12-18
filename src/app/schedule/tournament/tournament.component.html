@@ -1,0 +1,14 @@
+<form #scheduleForm="ngForm" (ngSubmit)="onSubmit()">
+  <table class="table table-striped" *ngIf="schedule">
+    <tr *ngFor="let game of schedule; index as i">
+      <td class="test">{{ game.team1 }}</td>
+      <td>-</td>
+      <td>{{ game.team2 }}</td>
+      <td class="form-inline">
+        <input name="input-1-{{i}}" [(ngModel)]="game.goals1" class="form-control" type="text" /> :
+        <input name="input-2-{{i}}" [(ngModel)]="game.goals2" class="form-control" type="text" />
+      </td>
+    </tr>
+  </table>
+  <button type="submit" class="btn btn-outline-primary" [hidden]="!scheduleForm.dirty">Speichern</button>
+</form>

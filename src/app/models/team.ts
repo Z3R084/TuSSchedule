@@ -1,3 +1,8 @@
+export interface ITeamAssociation {
+  originalName: string;
+  newName: string;
+}
+
 export class Team {
   league: number;
   name: string;

@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import * as shuffle from 'shuffle-array';
 
 import { TournamentService } from '../../services/tournament.service';
 import { Tournament } from '../../models/tournament';
 import { Team } from '../../models/team';
 import { Schedule } from '../../models/schedule';
+import { Table } from '../../models/table';
 
 @Component({
   selector: 'tus-mode',
@@ -14,7 +16,7 @@ export class ModeComponent {
   tournament: Tournament;
   leagues: Array<number> = [];
 
-  constructor(private tournamentService: TournamentService) {
+  constructor(private tournamentService: TournamentService, private route: Router) {
     this.tournament = tournamentService.getTournament();
   }
 
@@ -36,14 +38,16 @@ export class ModeComponent {
   create() {
     this.generateSchedule();
     this.tournamentService.addTournamentDb(this.tournament).subscribe();
+    this.route.navigate(['/schedule']);
   }
 
   update() {
     if (this.tournament.schedule) {
-      this.tournament.schedule.length = 0;
+      this.tournament.schedule = [];
     }
     this.generateSchedule();
     this.tournamentService.updateTournamentDb(this.tournament).subscribe();
+    this.route.navigate(['/schedule']);
   }
 
   private generateSchedule(): void {
@@ -52,6 +56,10 @@ export class ModeComponent {
     } else {
       this.generateKoTournamentSchedule();
     }
+  }
+
+  private inserTable(team: string): void {
+    this.tournament.table.push(new Table(team));
   }
 
   private generateRoundRobinTournamentSchedule(teams?: any, cancel?: boolean) {
