@@ -10,7 +10,7 @@
     </div>
   </div>
 </header>
-<main [@routerTransition]="getState(o)">
+<main [@routerTransition]="getState(o)" class="container">
   <router-outlet #o="outlet"></router-outlet>
   <app-messages></app-messages>
 </main>

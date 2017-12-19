@@ -60,12 +60,6 @@
           "goals2": 0
         },
         {
-          "team1": "aa",
-          "team2": "dd",
-          "goals1": 0,
-          "goals2": 0
-        },
-        {
           "team1": "cc",
           "team2": "bb",
           "goals1": 0,
@@ -73,27 +67,71 @@
         },
         {
           "team1": "aa",
-          "team2": "bb",
+          "team2": "dd",
           "goals1": 0,
           "goals2": 0
         },
         {
-          "team1": "dd",
-          "team2": "cc",
-          "goals1": 0,
-          "goals2": 0
-        },
-        {
-          "team1": "aa",
-          "team2": "cc",
+          "team1": "cc",
+          "team2": "dd",
           "goals1": 0,
           "goals2": 0
         },
         {
           "team1": "bb",
-          "team2": "dd",
+          "team2": "aa",
           "goals1": 0,
           "goals2": 0
+        },
+        {
+          "team1": "cc",
+          "team2": "aa",
+          "goals1": 0,
+          "goals2": 0
+        },
+        {
+          "team1": "dd",
+          "team2": "bb",
+          "goals1": 0,
+          "goals2": 0
+        }
+      ],
+      "table": [
+        {
+          "team": "aa",
+          "won": 0,
+          "lost": 0,
+          "drawn": 0,
+          "goalsFor": 0,
+          "goalsAgainst": 0,
+          "goalDifference": 0
+        },
+        {
+          "team": "bb",
+          "won": 0,
+          "lost": 0,
+          "drawn": 0,
+          "goalsFor": 0,
+          "goalsAgainst": 0,
+          "goalDifference": 0
+        },
+        {
+          "team": "cc",
+          "won": 0,
+          "lost": 0,
+          "drawn": 0,
+          "goalsFor": 0,
+          "goalsAgainst": 0,
+          "goalDifference": 0
+        },
+        {
+          "team": "dd",
+          "won": 0,
+          "lost": 0,
+          "drawn": 0,
+          "goalsFor": 0,
+          "goalsAgainst": 0,
+          "goalDifference": 0
         }
       ]
     }

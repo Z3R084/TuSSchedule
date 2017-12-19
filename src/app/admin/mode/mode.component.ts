@@ -48,6 +48,7 @@ export class ModeComponent {
     } else {
       this.updateTeams();
       console.log(this.tournament.schedule);
+      console.log(this.tournament.teams);
     }
     // this.tournamentService.updateTournamentDb(this.tournament).subscribe();
     // this.route.navigate(['/schedule']);
@@ -63,19 +64,23 @@ export class ModeComponent {
 
   private generateSchedule(): void {
     this.tournament.schedule = [];
+    this.tournament.table = [];
 
     if (this.tournament.mode === 'league') {
       this.generateRoundRobinTournamentSchedule();
+      this.insertTable();
     } else {
       this.generateKoTournamentSchedule();
     }
   }
 
-  private inserTable(team: string): void {
-    this.tournament.table.push(new Table(team));
+  private insertTable(): void {
+    for (let team of this.tournament.teams) {
+      this.tournament.table.push(new Table(team.name));
+    }
   }
 
-  private generateRoundRobinTournamentSchedule(teams?: any, cancel?: boolean) {
+  private generateRoundRobinTournamentSchedule(teams?: Team[], cancel?: boolean) {
     teams = teams || this.tournament.teams.filter((team, index) => {
       return team.league === 1;
     });
