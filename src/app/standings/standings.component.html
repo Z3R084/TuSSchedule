@@ -1,3 +1,34 @@
 <div class="container">
   <h2>Tabelle</h2>
+  <div *ngIf="!standings">
+    Es wurde noch kein Turnier angelegt.
+  </div>
+  <div *ngIf="standings">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Mannschaft</th>
+          <th>Spiele</th>
+          <th>g.</th>
+          <th>u.</th>
+          <th>v.</th>
+          <th>Tore</th>
+          <th>Diff.</th>
+          <th>Pkte.</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let standing of standings">
+          <td>{{ standing.team }}</td>
+          <td>{{ standing.won + standing.lost + standing.drawn }}</td>
+          <td>{{ standing.won }}</td>
+          <td>{{ standing.drawn }}</td>
+          <td>{{ standing.lost }}</td>
+          <td>{{ standing.goalsFor }} : {{ standing.goalsAgainst }}</td>
+          <td>{{ standing.goalsFor - standing.goalsAgainst }}</td>
+          <td>{{ standing.points }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

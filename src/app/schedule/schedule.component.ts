@@ -15,7 +15,11 @@ export class ScheduleComponent implements OnInit {
 
   ngOnInit() {
     this.tournamentService.getTournamentDb().subscribe((tournament: Tournament) => {
+      if (Object.keys(tournament).length === 0) {
+        tournament = null;
+      }
       this.tournament = tournament;
+      
     });
   }
 }

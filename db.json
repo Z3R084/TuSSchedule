@@ -26,74 +26,62 @@
         {
           "team1": "aa",
           "team2": "dd",
-          "goals1": 0,
-          "goals2": 0
+          "saved": false
         },
         {
           "team1": "bb",
           "team2": "cc",
-          "goals1": 0,
-          "goals2": 0
+          "saved": false
         },
         {
           "team1": "aa",
           "team2": "cc",
-          "goals1": 0,
-          "goals2": 0
+          "saved": false
         },
         {
           "team1": "dd",
           "team2": "bb",
-          "goals1": 0,
-          "goals2": 0
+          "saved": false
         },
         {
           "team1": "aa",
           "team2": "bb",
-          "goals1": 0,
-          "goals2": 0
+          "saved": false
         },
         {
           "team1": "cc",
           "team2": "dd",
-          "goals1": 0,
-          "goals2": 0
+          "saved": false
         },
         {
-          "team1": "cc",
-          "team2": "bb",
-          "goals1": 0,
-          "goals2": 0
+          "team1": "dd",
+          "team2": "cc",
+          "saved": false
         },
         {
           "team1": "aa",
-          "team2": "dd",
-          "goals1": 0,
-          "goals2": 0
+          "team2": "bb",
+          "saved": false
+        },
+        {
+          "team1": "dd",
+          "team2": "bb",
+          "saved": false
         },
         {
           "team1": "cc",
-          "team2": "dd",
-          "goals1": 0,
-          "goals2": 0
+          "team2": "aa",
+          "saved": false
+        },
+        {
+          "team1": "dd",
+          "team2": "aa",
+          "saved": false
         },
         {
           "team1": "bb",
-          "team2": "aa",
-          "goals1": 0,
-          "goals2": 0
-        },
-        {
-          "team1": "cc",
-          "team2": "aa",
-          "goals1": 0,
-          "goals2": 0
-        },
-        {
-          "team1": "dd",
-          "team2": "bb",
-          "goals1": 0,
-          "goals2": 0
+          "team2": "cc",
+          "saved": false
         }
       ],
       "table": [
@@ -104,7 +92,7 @@
           "drawn": 0,
           "goalsFor": 0,
           "goalsAgainst": 0,
-          "goalDifference": 0
+          "points": 0
         },
         {
           "team": "bb",
@@ -113,7 +101,7 @@
           "drawn": 0,
           "goalsFor": 0,
           "goalsAgainst": 0,
-          "goalDifference": 0
+          "points": 0
         },
         {
           "team": "cc",
@@ -122,7 +110,7 @@
           "drawn": 0,
           "goalsFor": 0,
           "goalsAgainst": 0,
-          "goalDifference": 0
+          "points": 0
         },
         {
           "team": "dd",
@@ -131,7 +119,7 @@
           "drawn": 0,
           "goalsFor": 0,
           "goalsAgainst": 0,
-          "goalDifference": 0
+          "points": 0
         }
       ]
     }

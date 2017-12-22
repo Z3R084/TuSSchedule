@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Tournament } from '../models/tournament';
 import { Schedule } from '../models/schedule';
 import { MessageService } from '../services/message.service';
+import { Table } from '../models/table';
 
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
@@ -28,7 +29,7 @@ export class TournamentService {
 
   addTournamentDb(tournament: Tournament): Observable<Tournament> {
     return this.http.post<Tournament>('http://localhost:3000/tournament', tournament, httpOptions).pipe(
-      tap((tournament: Tournament) => this.log(`added tournament ${tournament}`)),
+      // tap((tournament: Tournament) => this.log(`added tournament ${tournament}`)),
       catchError(this.handleError<Tournament>('addTournamentDb'))
     );
   }
@@ -75,10 +76,46 @@ export class TournamentService {
     );
   }
 
-  updateSchedule(schedule: Schedule[]): Observable<any> {
+  updateSchedule(schedule: Schedule[], originalSchedule: Schedule[]): Observable<any> {
+    this.updateStandings(schedule, originalSchedule);
     return this.http.put(`http://localhost:3000/schedule/${this._tournament.name}`, schedule, httpOptions).pipe(
       catchError(this.handleError<any>('updateSchedule'))
     );
+  }
+
+  private updateStandings(schedule: Schedule[], originalSchedule: Schedule[]): void {
+    //for (let game of schedule) {
+    schedule.forEach((game, index) => {
+      if (game.goals1 && game.goals2 && !game.saved) {
+        game.saved = true;
+        let standingEntry1 = this._tournament.table.find(team => team.team === game.team1);
+        let standingEntry2 = this._tournament.table.find(team => team.team === game.team2);
+        this.updateStanding(game, standingEntry1, standingEntry2);
+      } else if (game.goals1 && game.goals2 && game.saved) {
+        
+      }
+    });
+  }
+
+  private updateStanding(game: Schedule, standingTeam1: Table, standingTeam2: Table) {
+    if (game.goals1 > game.goals2) {
+      standingTeam1.won += 1;
+      standingTeam1.points += 3;
+      standingTeam2.lost += 1;
+    } else if (game.goals1 === game.goals2) {
+      standingTeam1.drawn += 1;
+      standingTeam1.points += 1;
+      standingTeam2.drawn += 1;
+      standingTeam2.points += 1;
+    } else {
+      standingTeam1.lost += 1;
+      standingTeam2.won += 1;
+      standingTeam2.points += 3;
+    }
+    standingTeam1.goalsFor += parseInt(<any>game.goals1);
+    standingTeam1.goalsAgainst += parseInt(<any>game.goals2);
+    standingTeam2.goalsFor += parseInt(<any>game.goals2);
+    standingTeam2.goalsAgainst += parseInt(<any>game.goals1);
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

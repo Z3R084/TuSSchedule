@@ -4,4 +4,7 @@
     <round-robin [schedule]="tournament.schedule" *ngIf="tournament.mode === 'league'"></round-robin>
     <tournament *ngIf="tournament.mode === 'tournament'"></tournament>
   </div>
+  <div *ngIf="!tournament">
+    Es wurde noch kein Turnier angelegt. 
+  </div>
 </div>
