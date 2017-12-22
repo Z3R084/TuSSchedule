@@ -23,7 +23,6 @@ export class RoundRobinComponent implements OnInit {
   onSubmit() {
     this.tournamentService.updateSchedule(this.schedule, this.originalSchedule).subscribe(() => {
       this.originalSchedule = this.schedule.map(x => Object.assign({}, x));
-      console.log(this.originalSchedule);
     });
     this.scheduleForm.resetForm(this.scheduleForm.value);
   }

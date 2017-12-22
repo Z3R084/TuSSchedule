@@ -5,19 +5,23 @@
       "teams": [
         {
           "name": "aa",
-          "league": 1
+          "league": 1,
+          "originalName": "aa"
         },
         {
           "name": "bb",
-          "league": 1
+          "league": 1,
+          "originalName": "bb"
         },
         {
           "name": "cc",
-          "league": 1
+          "league": 1,
+          "originalName": "cc"
         },
         {
           "name": "dd",
-          "league": 1
+          "league": 1,
+          "originalName": "dd"
         }
       ],
       "mode": "league",
@@ -26,99 +30,123 @@
         {
           "team1": "aa",
           "team2": "dd",
-          "saved": false
+          "saved": true,
+          "goals1": 2,
+          "goals2": 1
         },
         {
           "team1": "bb",
           "team2": "cc",
-          "saved": false
+          "saved": true,
+          "goals1": 4,
+          "goals2": 5
         },
         {
           "team1": "aa",
           "team2": "cc",
-          "saved": false
+          "saved": false,
+          "goals1": null,
+          "goals2": null
         },
         {
           "team1": "dd",
           "team2": "bb",
-          "saved": false
+          "saved": false,
+          "goals1": null,
+          "goals2": null
         },
         {
           "team1": "aa",
           "team2": "bb",
-          "saved": false
+          "saved": false,
+          "goals1": null,
+          "goals2": null
         },
         {
           "team1": "cc",
           "team2": "dd",
-          "saved": false
+          "saved": false,
+          "goals1": null,
+          "goals2": null
         },
         {
           "team1": "dd",
           "team2": "cc",
-          "saved": false
+          "saved": false,
+          "goals1": null,
+          "goals2": null
         },
         {
           "team1": "aa",
           "team2": "bb",
-          "saved": false
+          "saved": false,
+          "goals1": null,
+          "goals2": null
         },
         {
           "team1": "dd",
           "team2": "bb",
-          "saved": false
+          "saved": false,
+          "goals1": null,
+          "goals2": null
         },
         {
           "team1": "cc",
           "team2": "aa",
-          "saved": false
+          "saved": false,
+          "goals1": null,
+          "goals2": null
         },
         {
           "team1": "dd",
           "team2": "aa",
-          "saved": false
+          "saved": false,
+          "goals1": null,
+          "goals2": null
         },
         {
           "team1": "bb",
           "team2": "cc",
-          "saved": false
+          "saved": false,
+          "goals1": null,
+          "goals2": null
         }
       ],
       "table": [
         {
           "team": "aa",
-          "won": 0,
+          "won": 1,
           "lost": 0,
           "drawn": 0,
-          "goalsFor": 0,
-          "goalsAgainst": 0,
-          "points": 0
+          "goalsFor": 2,
+          "goalsAgainst": 1,
+          "points": 3
         },
         {
           "team": "bb",
           "won": 0,
-          "lost": 0,
+          "lost": 1,
           "drawn": 0,
-          "goalsFor": 0,
-          "goalsAgainst": 0,
+          "goalsFor": 4,
+          "goalsAgainst": 5,
           "points": 0
         },
         {
           "team": "cc",
-          "won": 0,
+          "won": 1,
           "lost": 0,
           "drawn": 0,
-          "goalsFor": 0,
-          "goalsAgainst": 0,
-          "points": 0
+          "goalsFor": 5,
+          "goalsAgainst": 4,
+          "points": 3
         },
         {
           "team": "dd",
           "won": 0,
-          "lost": 0,
+          "lost": 1,
           "drawn": 0,
-          "goalsFor": 0,
-          "goalsAgainst": 0,
+          "goalsFor": 1,
+          "goalsAgainst": 2,
           "points": 0
         }
       ]

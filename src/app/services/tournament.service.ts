@@ -10,6 +10,7 @@ import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { catchError, map, tap, publishReplay } from 'rxjs/operators';
 import { refCount } from 'rxjs/operators/refCount';
+import { stagger } from '@angular/animations/src/animation_metadata';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -78,7 +79,7 @@ export class TournamentService {
 
   updateSchedule(schedule: Schedule[], originalSchedule: Schedule[]): Observable<any> {
     this.updateStandings(schedule, originalSchedule);
-    return this.http.put(`http://localhost:3000/schedule/${this._tournament.name}`, schedule, httpOptions).pipe(
+    return this.http.put(`http://localhost:3000/schedule/${this._tournament.name}`, this._tournament, httpOptions).pipe(
       catchError(this.handleError<any>('updateSchedule'))
     );
   }
@@ -86,36 +87,105 @@ export class TournamentService {
   private updateStandings(schedule: Schedule[], originalSchedule: Schedule[]): void {
     //for (let game of schedule) {
     schedule.forEach((game, index) => {
+      let standingEntry1 = this._tournament.table.find(team => team.team === game.team1);
+      let standingEntry2 = this._tournament.table.find(team => team.team === game.team2);
+      this.converToInt(game);
       if (game.goals1 && game.goals2 && !game.saved) {
         game.saved = true;
-        let standingEntry1 = this._tournament.table.find(team => team.team === game.team1);
-        let standingEntry2 = this._tournament.table.find(team => team.team === game.team2);
         this.updateStanding(game, standingEntry1, standingEntry2);
       } else if (game.goals1 && game.goals2 && game.saved) {
-        
+        this.updateEntry(game, originalSchedule[index], standingEntry1, standingEntry2);
       }
     });
   }
 
+  private converToInt(game: Schedule): void {
+    game.goals1 = parseInt(<any>game.goals1);
+    game.goals2 = parseInt(<any>game.goals2);
+  }
+
+  /// ToDo: Migration mit updateStanding möglich?
+  private updateEntry(game: Schedule, gameOriginal: Schedule, standingTeam1: Table, standingTeam2: Table): void {
+    if (game.goals1 == gameOriginal.goals1 && game.goals2 == gameOriginal.goals2) {
+      return;
+    }
+    standingTeam1.goalsFor += (game.goals1 - gameOriginal.goals1);
+    standingTeam1.goalsAgainst += (game.goals2 - gameOriginal.goals2);
+    standingTeam2.goalsFor += (game.goals2 - gameOriginal.goals2);
+    standingTeam2.goalsAgainst += (game.goals1 - gameOriginal.goals1);
+
+    if (game.goals1 < game.goals2 && gameOriginal.goals1 > gameOriginal.goals2) {
+      this.addLose(standingTeam1, true);
+      this.addVictory(standingTeam2, true);
+    } else if (game.goals1 > game.goals2 && gameOriginal.goals1 < gameOriginal.goals2) {
+      this.addVictory( standingTeam1, true);
+      this.addLose(standingTeam2, true);
+    } else if (game.goals1 === game.goals2 && gameOriginal.goals1 > gameOriginal.goals2) {
+      standingTeam1.won -= 1;
+      standingTeam1.points -=3;
+      standingTeam2.lost -=1;
+      this.addDraw(standingTeam1);
+      this.addDraw(standingTeam2);
+    } else if (game.goals1 === game.goals2 && gameOriginal.goals1 < gameOriginal.goals2) {
+      standingTeam1.lost -= 1;
+      standingTeam2.won -= 1;
+      standingTeam2.points -= 3;
+      this.addDraw(standingTeam1);
+      this.addDraw(standingTeam2);
+    } else if (game.goals1 > game.goals2 && gameOriginal.goals1 === gameOriginal.goals2) {
+      this.subDraw(standingTeam1);
+      this.subDraw(standingTeam2);
+      this.addVictory(standingTeam1);
+      this.addLose(standingTeam2);
+    } else if (game.goals1 < game.goals2 && gameOriginal.goals1 === gameOriginal.goals2) {
+      this.subDraw(standingTeam1);
+      this.subDraw(standingTeam2);
+      this.addLose(standingTeam1);
+      this.addVictory(standingTeam2);
+    }
+  }
+
+  private addVictory(standing: Table, changed?: boolean) {
+    standing.won += 1;
+    standing.points += 3;
+    if (changed) {
+      standing.lost -= 1;
+    }
+  }
+
+  private addLose(standing: Table, changed?: boolean) {
+    standing.lost += 1;
+    if (changed) {
+      standing.won -= 1;
+      standing.points -= 3;
+    }
+  }
+
+  private addDraw(standing: Table) {
+    standing.drawn += 1;
+    standing.points += 1;
+  }
+
+  private subDraw(standing: Table) {
+    standing.drawn -= 1;
+    standing.points -= 1;
+  }
+
   private updateStanding(game: Schedule, standingTeam1: Table, standingTeam2: Table) {
     if (game.goals1 > game.goals2) {
-      standingTeam1.won += 1;
-      standingTeam1.points += 3;
-      standingTeam2.lost += 1;
+      this.addVictory(standingTeam1);
+      this.addLose(standingTeam2);
     } else if (game.goals1 === game.goals2) {
-      standingTeam1.drawn += 1;
-      standingTeam1.points += 1;
-      standingTeam2.drawn += 1;
-      standingTeam2.points += 1;
+      this.addDraw(standingTeam1);
+      this.addDraw(standingTeam2);
     } else {
-      standingTeam1.lost += 1;
-      standingTeam2.won += 1;
-      standingTeam2.points += 3;
+      this.addLose(standingTeam1);
+      this.addVictory(standingTeam2);
     }
-    standingTeam1.goalsFor += parseInt(<any>game.goals1);
-    standingTeam1.goalsAgainst += parseInt(<any>game.goals2);
-    standingTeam2.goalsFor += parseInt(<any>game.goals2);
-    standingTeam2.goalsAgainst += parseInt(<any>game.goals1);
+    standingTeam1.goalsFor += game.goals1;
+    standingTeam1.goalsAgainst += game.goals2;
+    standingTeam2.goalsFor += game.goals2;
+    standingTeam2.goalsAgainst += game.goals1;
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

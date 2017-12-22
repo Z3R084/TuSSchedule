@@ -52,12 +52,10 @@ low(adapter).then(db => {
   app.put('/schedule/:tournament', (req, res) => {
     console.log('Received schedule update');
     db.get('tournament')
+      .find({ name: req.params.tournament })
+      .assign(req.body)
+      .write()
       .then(tournament => res.json(tournament));
-    // db.get('tournament')
-    //   .find({ name: req.params.tournament })
-    //   .assign({ schedule: req.body })
-    //   .write()
-    //   .then(tournament => res.json(tournament));
   });
 
   return db.defaults({ tournament: [] }).write();
