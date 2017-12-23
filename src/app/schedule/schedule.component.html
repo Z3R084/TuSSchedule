@@ -2,7 +2,7 @@
   <h2>Spielplan</h2>
   <div *ngIf="tournament">
     <round-robin [schedule]="tournament.schedule" *ngIf="tournament.mode === 'league'"></round-robin>
-    <tournament *ngIf="tournament.mode === 'tournament'"></tournament>
+    <tournament *ngIf="tournament.mode === 'tournament'" [schedule]="tournament.tournamentSchedule"></tournament>
   </div>
   <div *ngIf="!tournament">
     Es wurde noch kein Turnier angelegt. 

@@ -7,6 +7,7 @@ import { Tournament } from '../../models/tournament';
 import { Team } from '../../models/team';
 import { Schedule } from '../../models/schedule';
 import { Table } from '../../models/table';
+import { Round } from '../../models/round';
 
 @Component({
   selector: 'tus-mode',
@@ -16,6 +17,7 @@ export class ModeComponent {
   tournament: Tournament;
   leagues: Array<number> = [];
   generateNewSchedule: boolean = false;
+  singleElimination: number[] = [2, 4, 8, 16, 32, 64];
 
   constructor(private tournamentService: TournamentService, private route: Router) {
     this.tournament = tournamentService.getTournament();
@@ -47,8 +49,6 @@ export class ModeComponent {
       this.generateSchedule();
     } else {
       this.updateTeams();
-      console.log(this.tournament.schedule);
-      console.log(this.tournament.teams);
     }
     // this.tournamentService.updateTournamentDb(this.tournament).subscribe();
     // this.route.navigate(['/schedule']);
@@ -56,16 +56,23 @@ export class ModeComponent {
 
   private updateTeams(): void {
     this.tournament.teams.forEach(team => {
-      this.tournament.schedule.filter(schedule => schedule.team1 === team.originalName).forEach(schedule => schedule.team1 = team.name);
-      this.tournament.schedule.filter(schedule => schedule.team2 === team.originalName).forEach(schedule => schedule.team2 = team.name);
-      this.tournament.table.filter(table => table.team === team.originalName).forEach(table => table.team = team.name);
+      if (this.tournament.schedule) {
+        this.tournament.schedule.filter(schedule => schedule.team1 === team.originalName).forEach(schedule => schedule.team1 = team.name);
+        this.tournament.schedule.filter(schedule => schedule.team2 === team.originalName).forEach(schedule => schedule.team2 = team.name);
+      }
+      if (this.tournament.table) {
+        this.tournament.table.filter(table => table.team === team.originalName).forEach(table => table.team = team.name);
+      }
+      if (this.tournament.tournamentSchedule) {
+        this.tournament.tournamentSchedule.forEach(round => {
+          round.schedule.filter(game => game.team1 === team.originalName).forEach(game => game.team1 = team.name);
+          round.schedule.filter(game => game.team2 === team.originalName).forEach(game => game.team2 = team.name);
+        });
+      }
     });
   }
 
   private generateSchedule(): void {
-    this.tournament.schedule = [];
-    this.tournament.table = [];
-
     if (this.tournament.mode === 'league') {
       this.generateRoundRobinTournamentSchedule();
       this.insertTable();
@@ -81,6 +88,9 @@ export class ModeComponent {
   }
 
   private generateRoundRobinTournamentSchedule(teams?: Team[], cancel?: boolean) {
+    this.tournament.schedule = [];
+    this.tournament.table = [];
+
     teams = teams || this.tournament.teams.filter((team, index) => {
       return team.league === 1;
     });
@@ -109,25 +119,62 @@ export class ModeComponent {
   }
 
   private generateKoTournamentSchedule() {
-    let schedule = [];
-    const teams = this.tournament.teams;
+    this.tournament.tournamentSchedule = [];
+    let schedule: Schedule[] = [];
+    const teams = this.tournament.teams.map(x => Object.assign({}, x));
 
-    if (teams.length % 2 === 1) {
-      const dummy: Team = { name: 'Freilos', league: 1 };
-      teams.push(dummy);
-    }
+    // if (teams.length % 2 === 1) {
+    //   const dummy: Team = { name: 'Freilos', league: 1 };
+    //   teams.push(dummy);
+    // }
+    const regularGames = this.getNumberGames(teams.length);
+    const numberBye = regularGames - teams.length;
+    const playedGames = regularGames / 2 - numberBye;
+    let scheduledGames = 0;
+    // for (let i = 0; i < numberBye; i++) {
+    //   teams.push(new Team('Freilos'));
+    // }
 
-    while (teams.length > 1) {
-      let randomNumber = Math.floor(Math.random() * teams.length)
+    while (teams.length > 1 && scheduledGames < playedGames) {
+      let randomNumber = Math.floor(Math.random() * teams.length);
       const team1 = teams[randomNumber];
       teams.splice(randomNumber, 1);
       randomNumber = Math.floor(Math.random() * teams.length)
       const team2 = teams[randomNumber];
-      schedule.push([team1.name, team2.name]);
+      schedule.push(new Schedule(team1.name, team2.name));
+      teams.splice(randomNumber, 1);
+      scheduledGames++;
+    }
+
+    for (let i = 0; i < numberBye; i++) {
+      let randomNumber = Math.floor(Math.random() * teams.length);
+      const team = teams[randomNumber];
+      schedule.push(new Schedule(team.name, 'Freilos'));
       teams.splice(randomNumber, 1);
     }
-    console.log(schedule);
+    this.tournament.tournamentSchedule.push(new Round(1, schedule));
+    this.createEmptyRounds(2);
+  }
 
+  private createEmptyRounds(roundNumber: number): void {
+    const prevRound = this.tournament.tournamentSchedule.find(round => round.roundNumber === roundNumber - 1);
+    let schedule: Schedule[] = [];
+    for (let i = 0; i < prevRound.schedule.length / 2; i++) {
+      schedule.push(new Schedule('', ''));
+    }
+    this.tournament.tournamentSchedule.push(new Round(roundNumber, schedule));
+    if (schedule.length > 1) {
+      this.createEmptyRounds(roundNumber + 1);
+    }
+
+  }
+
+  private getNumberGames(teams: number): number {
+    for (let n of this.singleElimination) {
+      if (n - teams > 0 || n - teams === 0) {
+        return n;
+      }
+    }
   }
 
   private setLeagueTeam() {

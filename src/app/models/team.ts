@@ -1,9 +1,3 @@
 export class Team {
-  league: number;
-  name: string;
-
-  constructor(public originalName?: string) {
-    this.name = '';
-    this.league = 1;
-  }
+  constructor(public name: string = '', public league: number = 1, public originalName?: string) { }
 }

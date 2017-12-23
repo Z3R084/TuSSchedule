@@ -1,6 +1,11 @@
 <form #scheduleForm="ngForm" (ngSubmit)="onSubmit()">
-  <table class="table table-striped" *ngIf="schedule">
-    <tr *ngFor="let game of schedule; index as i">
+  <ul class="nav">
+    <li *ngFor="let round of schedule" class="nav-item">
+      Runde {{ round.roundNumber }}
+    </li>
+  </ul>
+  <table class="table table-striped">
+    <tr *ngFor="let game of shownSchedule; index as i">
       <td class="test">{{ game.team1 }}</td>
       <td>-</td>
       <td>{{ game.team2 }}</td>
