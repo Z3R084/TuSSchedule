@@ -1,6 +1,7 @@
 <form #scheduleForm="ngForm" (ngSubmit)="onSubmit()">
   <table class="table table-striped" *ngIf="schedule">
-    <tr *ngFor="let game of schedule; index as i">
+    <tr *ngFor="let game of schedule; index as i" [hidden]="game.team1 === 'Spielfrei' || game.team2 === 'Spielfrei'">
+      <td *ngIf="multiLeague">Liga {{ game.league }}</td>
       <td class="test">{{ game.team1 }}</td>
       <td>-</td>
       <td>{{ game.team2 }}</td>

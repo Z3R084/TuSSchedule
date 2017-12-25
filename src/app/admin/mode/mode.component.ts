@@ -74,8 +74,7 @@ export class ModeComponent {
 
   private generateSchedule(): void {
     if (this.tournament.mode === 'league') {
-      this.generateRoundRobinTournamentSchedule();
-      this.insertTable();
+      this.generateRoundRobin();
     } else {
       this.generateKoTournamentSchedule();
     }
@@ -83,22 +82,38 @@ export class ModeComponent {
 
   private insertTable(): void {
     for (let team of this.tournament.teams) {
-      this.tournament.table.push(new Table(team.name));
+      this.tournament.table.push(new Table(team.name, team.league));
+    }
+  }
+
+  private generateRoundRobin() {
+    this.tournament.schedule = [];
+    this.tournament.table = [];
+    this.tournament.tournamentSchedule = null;
+    this.generateRoundRobinTournamentSchedule();
+    const teams = this.tournament.teams.filter(team => team.league === 2);
+    if (teams.length > 0) {
+      this.generateRoundRobinTournamentSchedule(teams);
+      this.shuffleLeague();
+    }
+    this.insertTable();
+  }
+
+  private shuffleLeague(): void {
+    for (let i = 0; i < this.tournament.schedule.length; i++) {
+      if (i % 2 !== 0) {
+        this.tournament.schedule.splice(i, 0, this.tournament.schedule.pop());
+      }
     }
   }
 
   private generateRoundRobinTournamentSchedule(teams?: Team[], cancel?: boolean) {
-    this.tournament.schedule = [];
-    this.tournament.table = [];
-    this.tournament.tournamentSchedule = null;
 
-    teams = teams || this.tournament.teams.filter((team, index) => {
-      return team.league === 1;
-    });
+    teams = teams || this.tournament.teams.filter(team => team.league === 1);
 
 
     if (teams.length % 2 === 1) {
-      const dummy: Team = { name: 'Spielfrei', league: 1 };
+      const dummy: Team = { name: 'Spielfrei', league: teams[0].league };
       teams.push(dummy);
     }
 
@@ -108,7 +123,7 @@ export class ModeComponent {
       //schedule[i] = [];
       for (let j = 0; j < teams.length / 2; j++) {
         // schedule[i].push([teams[j].name, teams[rounds - j].name]);
-        this.tournament.schedule.push(new Schedule(teams[j].name, teams[rounds - j].name));
+        this.tournament.schedule.push(new Schedule(teams[j].name, teams[rounds - j].name, teams[j].league));
       }
       teams.splice(1, 0, teams.pop());
     }
@@ -168,7 +183,7 @@ export class ModeComponent {
   private createEmptyRounds(roundNumber: number): void {
     const prevRound = this.tournament.tournamentSchedule.find(round => round.roundNumber === roundNumber - 1);
     let schedule: Schedule[] = [];
-    
+
     for (let i = 0; i < prevRound.schedule.length / 2; i++) {
       let team1 = '';
       let team2 = '';

@@ -41,37 +41,80 @@
         {
           "team1": "aa",
           "team2": "Spielfrei",
+          "league": 1,
+          "saved": false
+        },
+        {
+          "team1": "ff",
+          "team2": "Spielfrei",
+          "league": 2,
           "saved": false
         },
         {
           "team1": "bb",
           "team2": "cc",
+          "league": 1,
+          "saved": false
+        },
+        {
+          "team1": "dd",
+          "team2": "ee",
+          "league": 2,
           "saved": false
         },
         {
           "team1": "aa",
           "team2": "cc",
+          "league": 1,
+          "saved": false
+        },
+        {
+          "team1": "Spielfrei",
+          "team2": "ee",
+          "league": 2,
           "saved": false
         },
         {
           "team1": "Spielfrei",
           "team2": "bb",
+          "league": 1,
+          "saved": false
+        },
+        {
+          "team1": "dd",
+          "team2": "ff",
+          "league": 2,
           "saved": false
         },
         {
           "team1": "aa",
           "team2": "bb",
+          "league": 1,
+          "saved": false
+        },
+        {
+          "team1": "ee",
+          "team2": "ff",
+          "league": 2,
           "saved": false
         },
         {
           "team1": "cc",
           "team2": "Spielfrei",
+          "league": 1,
+          "saved": false
+        },
+        {
+          "team1": "dd",
+          "team2": "Spielfrei",
+          "league": 2,
           "saved": false
         }
       ],
       "table": [
         {
           "team": "aa",
+          "league": 1,
           "won": 0,
           "lost": 0,
           "drawn": 0,
@@ -81,6 +124,7 @@
         },
         {
           "team": "bb",
+          "league": 1,
           "won": 0,
           "lost": 0,
           "drawn": 0,
@@ -90,6 +134,7 @@
         },
         {
           "team": "cc",
+          "league": 1,
           "won": 0,
           "lost": 0,
           "drawn": 0,
@@ -99,6 +144,7 @@
         },
         {
           "team": "dd",
+          "league": 2,
           "won": 0,
           "lost": 0,
           "drawn": 0,
@@ -108,6 +154,7 @@
         },
         {
           "team": "ee",
+          "league": 2,
           "won": 0,
           "lost": 0,
           "drawn": 0,
@@ -117,6 +164,7 @@
         },
         {
           "team": "ff",
+          "league": 2,
           "won": 0,
           "lost": 0,
           "drawn": 0,

@@ -13,11 +13,14 @@ export class RoundRobinComponent implements OnInit {
   @Input() schedule: Schedule[];
   @ViewChild('scheduleForm') scheduleForm: NgForm;
   originalSchedule: Schedule[];
+  multiLeague: boolean;
 
   constructor(private tournamentService: TournamentService) { }
 
   ngOnInit() {
     this.originalSchedule = this.schedule.map(x => Object.assign({}, x));
+    const gameLeague2 = this.schedule.filter(game => game.league === 2);
+    this.multiLeague = (gameLeague2.length > 0) ? true : false;
   }
 
   onSubmit() {
