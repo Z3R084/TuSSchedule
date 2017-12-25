@@ -77,8 +77,11 @@ export class TournamentService {
     );
   }
 
-  updateSchedule(schedule: Schedule[], originalSchedule: Schedule[]): Observable<any> {
-    this.updateStandings(schedule, originalSchedule);
+  updateSchedule(schedule?: Schedule[], originalSchedule?: Schedule[]): Observable<any> {
+    if (schedule && originalSchedule) {
+      this.updateStandings(schedule, originalSchedule);
+    }
+
     return this.http.put(`http://localhost:3000/schedule/${this._tournament.name}`, this._tournament, httpOptions).pipe(
       catchError(this.handleError<any>('updateSchedule'))
     );
@@ -105,6 +108,7 @@ export class TournamentService {
   }
 
   /// ToDo: Migration mit updateStanding möglich?
+  /// ToDo: Muss eigentlich in schedule.component.ts ausgeführt werden
   private updateEntry(game: Schedule, gameOriginal: Schedule, standingTeam1: Table, standingTeam2: Table): void {
     if (game.goals1 == gameOriginal.goals1 && game.goals2 == gameOriginal.goals2) {
       return;
@@ -118,12 +122,12 @@ export class TournamentService {
       this.addLose(standingTeam1, true);
       this.addVictory(standingTeam2, true);
     } else if (game.goals1 > game.goals2 && gameOriginal.goals1 < gameOriginal.goals2) {
-      this.addVictory( standingTeam1, true);
+      this.addVictory(standingTeam1, true);
       this.addLose(standingTeam2, true);
     } else if (game.goals1 === game.goals2 && gameOriginal.goals1 > gameOriginal.goals2) {
       standingTeam1.won -= 1;
-      standingTeam1.points -=3;
-      standingTeam2.lost -=1;
+      standingTeam1.points -= 3;
+      standingTeam2.lost -= 1;
       this.addDraw(standingTeam1);
       this.addDraw(standingTeam2);
     } else if (game.goals1 === game.goals2 && gameOriginal.goals1 < gameOriginal.goals2) {

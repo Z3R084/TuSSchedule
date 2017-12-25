@@ -6,3 +6,12 @@ input[type="text"] {
 button[type="submit"] {
   margin-bottom: 20px;
 }
+
+.nav-link:hover {
+  color: #0056b3;
+}
+
+.nav-link {
+  color: #007bff;
+  cursor: pointer;
+}

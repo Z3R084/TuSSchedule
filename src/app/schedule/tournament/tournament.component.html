@@ -1,18 +1,19 @@
 <form #scheduleForm="ngForm" (ngSubmit)="onSubmit()">
-  <ul class="nav">
+  <ul class="nav nav-tabs">
     <li *ngFor="let round of schedule" class="nav-item">
-      Runde {{ round.roundNumber }}
+      <span class="nav-link" [ngClass]="{'active': round.roundNumber === shownSchedule.roundNumber}" (click)="changeView(round)">Runde {{ round.roundNumber }}</span>
     </li>
   </ul>
   <table class="table table-striped">
-    <tr *ngFor="let game of shownSchedule; index as i">
+    <tr *ngFor="let game of shownSchedule.schedule; index as i">
       <td class="test">{{ game.team1 }}</td>
       <td>-</td>
       <td>{{ game.team2 }}</td>
-      <td class="form-inline">
+      <td class="form-inline" *ngIf="game.team2 !== 'Freilos'">
         <input name="input-1-{{i}}" [(ngModel)]="game.goals1" class="form-control" type="text" /> :
         <input name="input-2-{{i}}" [(ngModel)]="game.goals2" class="form-control" type="text" />
       </td>
+      <td *ngIf="game.team2 === 'Freilos'"></td>
     </tr>
   </table>
   <button type="submit" class="btn btn-outline-primary" [hidden]="!scheduleForm.dirty">Speichern</button>

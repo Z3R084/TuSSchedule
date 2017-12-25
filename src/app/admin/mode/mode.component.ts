@@ -50,8 +50,8 @@ export class ModeComponent {
     } else {
       this.updateTeams();
     }
-    // this.tournamentService.updateTournamentDb(this.tournament).subscribe();
-    // this.route.navigate(['/schedule']);
+    this.tournamentService.updateTournamentDb(this.tournament).subscribe();
+    this.route.navigate(['/schedule']);
   }
 
   private updateTeams(): void {
@@ -90,6 +90,7 @@ export class ModeComponent {
   private generateRoundRobinTournamentSchedule(teams?: Team[], cancel?: boolean) {
     this.tournament.schedule = [];
     this.tournament.table = [];
+    this.tournament.tournamentSchedule = null;
 
     teams = teams || this.tournament.teams.filter((team, index) => {
       return team.league === 1;
@@ -120,20 +121,16 @@ export class ModeComponent {
 
   private generateKoTournamentSchedule() {
     this.tournament.tournamentSchedule = [];
+    this.tournament.table = null;
+    this.tournament.schedule = null;
     let schedule: Schedule[] = [];
     const teams = this.tournament.teams.map(x => Object.assign({}, x));
 
-    // if (teams.length % 2 === 1) {
-    //   const dummy: Team = { name: 'Freilos', league: 1 };
-    //   teams.push(dummy);
-    // }
-    const regularGames = this.getNumberGames(teams.length);
-    const numberBye = regularGames - teams.length;
-    const playedGames = regularGames / 2 - numberBye;
+    // regularTeams ist die Zahl, die angibt wie viele Mannschaften teilnehmen müssen, damit das Turnier aufgeht
+    const regularTeams = this.getNumberGames(teams.length);
+    const numberBye = regularTeams - teams.length;
+    const playedGames = regularTeams / 2 - numberBye;
     let scheduledGames = 0;
-    // for (let i = 0; i < numberBye; i++) {
-    //   teams.push(new Team('Freilos'));
-    // }
 
     while (teams.length > 1 && scheduledGames < playedGames) {
       let randomNumber = Math.floor(Math.random() * teams.length);
@@ -152,15 +149,38 @@ export class ModeComponent {
       schedule.push(new Schedule(team.name, 'Freilos'));
       teams.splice(randomNumber, 1);
     }
+    if (numberBye > 1) {
+      this.shuffleBye(schedule, numberBye);
+    }
     this.tournament.tournamentSchedule.push(new Round(1, schedule));
     this.createEmptyRounds(2);
+  }
+
+  private shuffleBye(schedule: Schedule[], numberBye: number): void {
+    const regularGames = schedule.length - numberBye;
+    for (let i = 0; i <= regularGames; i++) {
+      if (i % 2 === 0) {
+        schedule.splice(i, 0, schedule.pop());
+      }
+    }
   }
 
   private createEmptyRounds(roundNumber: number): void {
     const prevRound = this.tournament.tournamentSchedule.find(round => round.roundNumber === roundNumber - 1);
     let schedule: Schedule[] = [];
+    
     for (let i = 0; i < prevRound.schedule.length / 2; i++) {
-      schedule.push(new Schedule('', ''));
+      let team1 = '';
+      let team2 = '';
+      let index = i * 2;
+      if (this.tournament.tournamentSchedule[0].schedule[index].team2 === 'Freilos') {
+        team1 = this.tournament.tournamentSchedule[0].schedule[index].team1;
+      }
+      index++;
+      if (this.tournament.tournamentSchedule[0].schedule[index].team2 === 'Freilos') {
+        team2 = this.tournament.tournamentSchedule[0].schedule[index].team1;
+      }
+      schedule.push(new Schedule(team1, team2));
     }
     this.tournament.tournamentSchedule.push(new Round(roundNumber, schedule));
     if (schedule.length > 1) {

@@ -5,55 +5,124 @@
       "teams": [
         {
           "name": "aa",
-          "league": 1
+          "league": 1,
+          "originalName": "aa"
         },
         {
           "name": "bb",
-          "league": 1
+          "league": 1,
+          "originalName": "bb"
         },
         {
           "name": "cc",
-          "league": 1
+          "league": 1,
+          "originalName": "cc"
         },
         {
           "name": "dd",
-          "league": 1
+          "league": 2,
+          "originalName": "dd"
         },
         {
           "name": "ee",
-          "league": 1
+          "league": 2,
+          "originalName": "ee"
         },
         {
           "name": "ff",
-          "league": 1
+          "league": 2,
+          "originalName": "ff"
         }
       ],
-      "mode": "tournament",
-      "tournamentSchedule": [
+      "mode": "league",
+      "tournamentSchedule": null,
+      "oldName": "test",
+      "schedule": [
         {
-          "roundNumber": 1,
-          "schedule": [
-            {
-              "team1": "bb",
-              "team2": "ee",
-              "saved": false
-            },
-            {
-              "team1": "ff",
-              "team2": "cc",
-              "saved": false
-            },
-            {
-              "team1": "dd",
-              "team2": "Freilos",
-              "saved": false
-            },
-            {
-              "team1": "aa",
-              "team2": "Freilos",
-              "saved": false
-            }
-          ]
+          "team1": "aa",
+          "team2": "Spielfrei",
+          "saved": false
+        },
+        {
+          "team1": "bb",
+          "team2": "cc",
+          "saved": false
+        },
+        {
+          "team1": "aa",
+          "team2": "cc",
+          "saved": false
+        },
+        {
+          "team1": "Spielfrei",
+          "team2": "bb",
+          "saved": false
+        },
+        {
+          "team1": "aa",
+          "team2": "bb",
+          "saved": false
+        },
+        {
+          "team1": "cc",
+          "team2": "Spielfrei",
+          "saved": false
+        }
+      ],
+      "table": [
+        {
+          "team": "aa",
+          "won": 0,
+          "lost": 0,
+          "drawn": 0,
+          "goalsFor": 0,
+          "goalsAgainst": 0,
+          "points": 0
+        },
+        {
+          "team": "bb",
+          "won": 0,
+          "lost": 0,
+          "drawn": 0,
+          "goalsFor": 0,
+          "goalsAgainst": 0,
+          "points": 0
+        },
+        {
+          "team": "cc",
+          "won": 0,
+          "lost": 0,
+          "drawn": 0,
+          "goalsFor": 0,
+          "goalsAgainst": 0,
+          "points": 0
+        },
+        {
+          "team": "dd",
+          "won": 0,
+          "lost": 0,
+          "drawn": 0,
+          "goalsFor": 0,
+          "goalsAgainst": 0,
+          "points": 0
+        },
+        {
+          "team": "ee",
+          "won": 0,
+          "lost": 0,
+          "drawn": 0,
+          "goalsFor": 0,
+          "goalsAgainst": 0,
+          "points": 0
+        },
+        {
+          "team": "ff",
+          "won": 0,
+          "lost": 0,
+          "drawn": 0,
+          "goalsFor": 0,
+          "goalsAgainst": 0,
+          "points": 0
         }
       ]
     }
