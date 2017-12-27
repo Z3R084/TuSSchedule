@@ -22,6 +22,9 @@ export class StandingsComponent implements OnInit {
         this.standingsLeague2 = tournament.table.filter(teamStanding => teamStanding.league === 2).sort((t1, t2) => {
           return t2.points - t1.points || (t2.goalsFor - t2.goalsAgainst) - (t1.goalsFor - t1.goalsAgainst);
         });
+        if (this.standingsLeague2.length === 0) {
+          this.standingsLeague2 = null;
+        }
       }
     });
   }

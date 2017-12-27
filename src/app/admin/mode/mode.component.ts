@@ -21,6 +21,9 @@ export class ModeComponent {
 
   constructor(private tournamentService: TournamentService, private route: Router) {
     this.tournament = tournamentService.getTournament();
+    if (this.tournament.mode === 'league') {
+      this.setLeagueNumber('1');
+    }
   }
 
   setLeagueNumber(strNumber: string) {
@@ -57,11 +60,21 @@ export class ModeComponent {
   private updateTeams(): void {
     this.tournament.teams.forEach(team => {
       if (this.tournament.schedule) {
-        this.tournament.schedule.filter(schedule => schedule.team1 === team.originalName).forEach(schedule => schedule.team1 = team.name);
-        this.tournament.schedule.filter(schedule => schedule.team2 === team.originalName).forEach(schedule => schedule.team2 = team.name);
+        this.tournament.schedule.filter(schedule => schedule.team1 === team.originalName).forEach(schedule => {
+          schedule.team1 = team.name;
+          schedule.league = team.league;
+        });
+        this.tournament.schedule.filter(schedule => schedule.team2 === team.originalName).forEach(schedule => {
+          schedule.team2 = team.name;
+          schedule.league = team.league;
+        });
       }
       if (this.tournament.table) {
-        this.tournament.table.filter(table => table.team === team.originalName).forEach(table => table.team = team.name);
+        this.tournament.table.filter(table => table.team === team.originalName).forEach(table => 
+          {
+            table.team = team.name;
+            table.league = team.league;
+          });
       }
       if (this.tournament.tournamentSchedule) {
         this.tournament.tournamentSchedule.forEach(round => {

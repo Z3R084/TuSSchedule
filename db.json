@@ -20,17 +20,17 @@
         },
         {
           "name": "dd",
-          "league": 2,
+          "league": 1,
           "originalName": "dd"
         },
         {
           "name": "ee",
-          "league": 2,
+          "league": 1,
           "originalName": "ee"
         },
         {
           "name": "ff",
-          "league": 2,
+          "league": 1,
           "originalName": "ff"
         }
       ],
@@ -47,7 +47,7 @@
         {
           "team1": "ff",
           "team2": "Spielfrei",
-          "league": 2,
+          "league": 1,
           "saved": false
         },
         {
@@ -59,7 +59,7 @@
         {
           "team1": "dd",
           "team2": "ee",
-          "league": 2,
+          "league": 1,
           "saved": false
         },
         {
@@ -71,7 +71,7 @@
         {
           "team1": "Spielfrei",
           "team2": "ee",
-          "league": 2,
+          "league": 1,
           "saved": false
         },
         {
@@ -83,7 +83,7 @@
         {
           "team1": "dd",
           "team2": "ff",
-          "league": 2,
+          "league": 1,
           "saved": false
         },
         {
@@ -95,7 +95,7 @@
         {
           "team1": "ee",
           "team2": "ff",
-          "league": 2,
+          "league": 1,
           "saved": false
         },
         {
@@ -107,7 +107,7 @@
         {
           "team1": "dd",
           "team2": "Spielfrei",
-          "league": 2,
+          "league": 1,
           "saved": false
         }
       ],
@@ -144,7 +144,7 @@
         },
         {
           "team": "dd",
-          "league": 2,
+          "league": 1,
           "won": 0,
           "lost": 0,
           "drawn": 0,
@@ -154,7 +154,7 @@
         },
         {
           "team": "ee",
-          "league": 2,
+          "league": 1,
           "won": 0,
           "lost": 0,
           "drawn": 0,
@@ -164,7 +164,7 @@
         },
         {
           "team": "ff",
-          "league": 2,
+          "league": 1,
           "won": 0,
           "lost": 0,
           "drawn": 0,
@@ -172,7 +172,8 @@
           "goalsAgainst": 0,
           "points": 0
         }
-      ]
+      ],
+      "classificationMode": "semifinal"
     }
   ]
 }
