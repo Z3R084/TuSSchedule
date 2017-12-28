@@ -10,6 +10,8 @@ import { Table } from '../models/table';
 export class StandingsComponent implements OnInit {
   standingsLeague1: Table[];
   standingsLeague2: Table[];
+  timer: any;
+  showSchedule: boolean = false;
 
   constructor(private tournamentService: TournamentService) { }
 
@@ -27,5 +29,16 @@ export class StandingsComponent implements OnInit {
         }
       }
     });
+  }
+
+  startTimer(): void {
+    this.timer = setInterval(() => {
+      this.showSchedule = !this.showSchedule;
+    }, 10 * 1000);
+  }
+
+  endTimer(): void {
+    clearInterval(this.timer);
+    this.timer = null;
   }
  }

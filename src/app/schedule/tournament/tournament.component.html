@@ -2,7 +2,12 @@
   <!-- <tournament-rounds [schedule]="schedule"></tournament-rounds> -->
   <ul class="nav nav-tabs">
     <li *ngFor="let round of schedule" class="nav-item">
-      <span class="nav-link" [ngClass]="{'active': round.roundNumber === shownSchedule.roundNumber}" (click)="changeView(round)">Runde {{ round.roundNumber }}</span>
+      <span class="nav-link" [ngClass]="{'active': round.roundNumber === shownSchedule.roundNumber}" (click)="changeView(round)"
+        [ngSwitch]="round.schedule.length">
+        <span *ngSwitchCase="1">Finale</span>
+        <span *ngSwitchCase="2">Halbfinale</span>
+        <span *ngSwitchDefault>Runde {{ round.roundNumber }}</span>
+      </span>
     </li>
   </ul>
   <table class="table table-striped">

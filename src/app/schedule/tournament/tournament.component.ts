@@ -40,10 +40,12 @@ export class TournamentComponent implements OnInit {
         const newIndex = Math.floor(index / 2);
         const winner = (game.goals1 > game.goals2) ? game.team1 : game.team2;
         let nextRound = this.schedule.find(round => round.roundNumber === this.shownSchedule.roundNumber + 1);
-        if (index % 2 === 0) {
-          nextRound.schedule[newIndex].team1 = winner;
-        } else {
-          nextRound.schedule[newIndex].team2 = winner;
+        if (nextRound) {
+          if (index % 2 === 0) {
+            nextRound.schedule[newIndex].team1 = winner;
+          } else {
+            nextRound.schedule[newIndex].team2 = winner;
+          }
         }
       }
     });

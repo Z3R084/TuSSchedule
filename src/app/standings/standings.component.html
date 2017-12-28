@@ -3,64 +3,71 @@
   <div *ngIf="!standingsLeague1">
     Es wurde noch kein Turnier angelegt.
   </div>
-  <div *ngIf="standingsLeague1">
-    <h4 *ngIf="standingsLeague2">Liga 1</h4>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Mannschaft</th>
-          <th>Spiele</th>
-          <th>g.</th>
-          <th>u.</th>
-          <th>v.</th>
-          <th>Tore</th>
-          <th>Diff.</th>
-          <th>Pkte.</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let standing of standingsLeague1">
-          <td>{{ standing.team }}</td>
-          <td>{{ standing.won + standing.lost + standing.drawn }}</td>
-          <td>{{ standing.won }}</td>
-          <td>{{ standing.drawn }}</td>
-          <td>{{ standing.lost }}</td>
-          <td>{{ standing.goalsFor }} : {{ standing.goalsAgainst }}</td>
-          <td>{{ standing.goalsFor - standing.goalsAgainst }}</td>
-          <td>{{ standing.points }}</td>
-        </tr>
-      </tbody>
-    </table>
+  <div *ngIf="!showSchedule">
+    <div *ngIf="standingsLeague1">
+      <h4 *ngIf="standingsLeague2">Liga 1</h4>
+      <div class="float-right">
+        <button type="button" class="btn btn-outline-secondary" (click)="startTimer()" *ngIf="!timer">Aktivieren</button>
+        <button type="button" class="btn btn-secondary" (click)="endTimer()" *ngIf="timer">Deaktivieren</button>
+      </div>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Mannschaft</th>
+            <th>Spiele</th>
+            <th>g.</th>
+            <th>u.</th>
+            <th>v.</th>
+            <th>Tore</th>
+            <th>Diff.</th>
+            <th>Pkte.</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let standing of standingsLeague1">
+            <td>{{ standing.team }}</td>
+            <td>{{ standing.won + standing.lost + standing.drawn }}</td>
+            <td>{{ standing.won }}</td>
+            <td>{{ standing.drawn }}</td>
+            <td>{{ standing.lost }}</td>
+            <td>{{ standing.goalsFor }} : {{ standing.goalsAgainst }}</td>
+            <td>{{ standing.goalsFor - standing.goalsAgainst }}</td>
+            <td>{{ standing.points }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div *ngIf="standingsLeague2">
+      <h4>Liga 2</h4>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Mannschaft</th>
+            <th>Spiele</th>
+            <th>g.</th>
+            <th>u.</th>
+            <th>v.</th>
+            <th>Tore</th>
+            <th>Diff.</th>
+            <th>Pkte.</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let standing of standingsLeague2">
+            <td>{{ standing.team }}</td>
+            <td>{{ standing.won + standing.lost + standing.drawn }}</td>
+            <td>{{ standing.won }}</td>
+            <td>{{ standing.drawn }}</td>
+            <td>{{ standing.lost }}</td>
+            <td>{{ standing.goalsFor }} : {{ standing.goalsAgainst }}</td>
+            <td>{{ standing.goalsFor - standing.goalsAgainst }}</td>
+            <td>{{ standing.points }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
-
-  {{ standingsLeague2 }}
-  <div *ngIf="standingsLeague2">
-    <h4>Liga 2</h4>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Mannschaft</th>
-          <th>Spiele</th>
-          <th>g.</th>
-          <th>u.</th>
-          <th>v.</th>
-          <th>Tore</th>
-          <th>Diff.</th>
-          <th>Pkte.</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let standing of standingsLeague2">
-          <td>{{ standing.team }}</td>
-          <td>{{ standing.won + standing.lost + standing.drawn }}</td>
-          <td>{{ standing.won }}</td>
-          <td>{{ standing.drawn }}</td>
-          <td>{{ standing.lost }}</td>
-          <td>{{ standing.goalsFor }} : {{ standing.goalsAgainst }}</td>
-          <td>{{ standing.goalsFor - standing.goalsAgainst }}</td>
-          <td>{{ standing.points }}</td>
-        </tr>
-      </tbody>
-    </table>
+  <div *ngIf="showSchedule">
+    Test
   </div>
 </div>

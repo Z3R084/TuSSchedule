@@ -4,10 +4,15 @@
       <span class="nav-link" [ngClass]="{'active': !shownSchedule}" (click)="shownSchedule = null">Spielplan Liga</span>
     </li>
     <li *ngFor="let round of tournament.tournamentSchedule" class="nav-item">
-      <span class="nav-link" [ngClass]="{'active': shownSchedule && round.roundNumber === shownSchedule.roundNumber}" (click)="changeView(round)">Runde {{ round.roundNumber }}</span>
+      <span class="nav-link" [ngClass]="{'active': shownSchedule && round.roundNumber === shownSchedule.roundNumber}" (click)="changeView(round)"
+        [ngSwitch]="round.schedule.length">
+        <span *ngSwitchCase="1">Finale</span>
+        <span *ngSwitchCase="2">Halbfinale</span>
+        <span *ngSwitchDefault>Runde {{ round.roundNumber }}</span>
+      </span>
     </li>
   </ul>
-  <table class="table table-striped" *ngIf="tournament.schedule">
+  <table class="table table-striped" *ngIf="tournament.schedule && shownSchedule === null">
     <tr *ngFor="let game of tournament.schedule; index as i" [hidden]="game.team1 === 'Spielfrei' || game.team2 === 'Spielfrei'">
       <td *ngIf="multiLeague">Liga {{ game.league }}</td>
       <td class="test">{{ game.team1 }}</td>
@@ -17,6 +22,18 @@
         <input name="input-1-{{i}}" [(ngModel)]="game.goals1" class="form-control" type="text" /> :
         <input name="input-2-{{i}}" [(ngModel)]="game.goals2" class="form-control" type="text" />
       </td>
+    </tr>
+  </table>
+  <table class="table table-striped" *ngIf="tournament.tournamentSchedule && shownSchedule !== null">
+    <tr *ngFor="let game of shownSchedule.schedule; index as i">
+      <td class="test">{{ game.team1 }}</td>
+      <td>-</td>
+      <td>{{ game.team2 }}</td>
+      <td class="form-inline" *ngIf="game.team2 !== 'Freilos'">
+        <input name="input-1-{{i}}" [(ngModel)]="game.goals1" class="form-control" type="text" /> :
+        <input name="input-2-{{i}}" [(ngModel)]="game.goals2" class="form-control" type="text" />
+      </td>
+      <td *ngIf="game.team2 === 'Freilos'"></td>
     </tr>
   </table>
   <button type="submit" class="btn btn-outline-primary" [hidden]="!scheduleForm.dirty">Speichern</button>

@@ -80,6 +80,9 @@ export class TournamentService {
   updateSchedule(schedule?: Schedule[], originalSchedule?: Schedule[]): Observable<any> {
     if (schedule && originalSchedule) {
       this.updateStandings(schedule, originalSchedule);
+      if (this._tournament.tournamentSchedule) {
+        this.fillFinals();
+      }
     }
 
     return this.http.put(`http://localhost:3000/schedule/${this._tournament.name}`, this._tournament, httpOptions).pipe(
@@ -87,8 +90,31 @@ export class TournamentService {
     );
   }
 
+  private fillFinals(): void {
+    let index = 0;
+    const standingsLeague1 = this._tournament.table.filter(teamStanding => teamStanding.league === 1).sort((t1, t2) => {
+      return t2.points - t1.points || (t2.goalsFor - t2.goalsAgainst) - (t1.goalsFor - t1.goalsAgainst);
+    });
+    let standingsLeague2 = this._tournament.table.filter(teamStanding => teamStanding.league === 2).sort((t1, t2) => {
+      return t2.points - t1.points || (t2.goalsFor - t2.goalsAgainst) - (t1.goalsFor - t1.goalsAgainst);
+    });
+    if (standingsLeague2.length === 0) {
+      standingsLeague2 = standingsLeague1.map(x => Object.assign({}, x));
+      standingsLeague2.shift();
+      index = 2;
+    } else {
+      index = 1;
+    }
+
+    const numberTeamsToForward = this._tournament.tournamentSchedule[0].schedule.length;
+    index = (numberTeamsToForward === 1) ? 0 : index;
+    for (let i = 0; i < numberTeamsToForward; i++) {
+      this._tournament.tournamentSchedule[0].schedule[i].team1 = standingsLeague1[i].team;
+      this._tournament.tournamentSchedule[0].schedule[i].team2 = standingsLeague2[index - i].team;
+    }
+  }
+
   private updateStandings(schedule: Schedule[], originalSchedule: Schedule[]): void {
-    //for (let game of schedule) {
     schedule.forEach((game, index) => {
       let standingEntry1 = this._tournament.table.find(team => team.team === game.team1);
       let standingEntry2 = this._tournament.table.find(team => team.team === game.team2);
