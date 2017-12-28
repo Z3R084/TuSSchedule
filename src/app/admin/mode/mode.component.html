@@ -27,14 +27,22 @@
     </div>
     <div *ngIf="tournament.mode === 'league'">
       <div class="form-row align-items-center">
-        <div class="col-sm-2">
+        <div class="col-sm-3">
           <label class="custom-control custom-checkbox">
             <input type="checkbox" class="custom-control-input" name="cbSecondRound" [(ngModel)]="tournament.secondRound" />
             <span class="custom-control-indicator"></span>
             <span class="custom-control-description">Hin- und Rückspiel</span>
           </label>
         </div>
-        <div class="col-sm-2 offset-sm-2">
+        <div class="col-sm-2">
+            <label class="custom-control custom-radio">
+              <input type="radio" class="custom-control-input" name="radioGame" [(ngModel)]="tournament.classificationMode" value="league"
+              />
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">Nur Liga</span>
+            </label>
+          </div>
+        <div class="col-sm-2">
           <label class="custom-control custom-radio">
             <input type="radio" class="custom-control-input" name="radioGame" [(ngModel)]="tournament.classificationMode" value="semifinal"
             />
@@ -53,7 +61,7 @@
         <div class="col-sm-2">
           <label class="custom-control custom-radio">
             <input type="radio" class="custom-control-input" name="radioGame" [(ngModel)]="tournament.classificationMode" value="tournament"
-            />
+              />
             <span class="custom-control-indicator"></span>
             <span class="custom-control-description">Platzierungsspiele</span>
           </label>

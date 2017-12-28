@@ -1,6 +1,14 @@
 <form #scheduleForm="ngForm" (ngSubmit)="onSubmit()">
-  <table class="table table-striped" *ngIf="schedule">
-    <tr *ngFor="let game of schedule; index as i" [hidden]="game.team1 === 'Spielfrei' || game.team2 === 'Spielfrei'">
+  <ul class="nav nav-tabs" *ngIf="tournament.tournamentSchedule">
+    <li class="nav-item">
+      <span class="nav-link" [ngClass]="{'active': !shownSchedule}" (click)="shownSchedule = null">Spielplan Liga</span>
+    </li>
+    <li *ngFor="let round of tournament.tournamentSchedule" class="nav-item">
+      <span class="nav-link" [ngClass]="{'active': shownSchedule && round.roundNumber === shownSchedule.roundNumber}" (click)="changeView(round)">Runde {{ round.roundNumber }}</span>
+    </li>
+  </ul>
+  <table class="table table-striped" *ngIf="tournament.schedule">
+    <tr *ngFor="let game of tournament.schedule; index as i" [hidden]="game.team1 === 'Spielfrei' || game.team2 === 'Spielfrei'">
       <td *ngIf="multiLeague">Liga {{ game.league }}</td>
       <td class="test">{{ game.team1 }}</td>
       <td>-</td>

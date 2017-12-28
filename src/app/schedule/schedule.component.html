@@ -1,7 +1,7 @@
 <div class="container">
-  <h2>Spielplan</h2>
+  <!-- <h2>Spielplan</h2> -->
   <div *ngIf="tournament">
-    <round-robin [schedule]="tournament.schedule" *ngIf="tournament.mode === 'league'"></round-robin>
+    <round-robin [schedule]="tournament" *ngIf="tournament.mode === 'league'"></round-robin>
     <tournament *ngIf="tournament.mode === 'tournament'" [schedule]="tournament.tournamentSchedule"></tournament>
   </div>
   <div *ngIf="!tournament">

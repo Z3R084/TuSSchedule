@@ -70,11 +70,10 @@ export class ModeComponent {
         });
       }
       if (this.tournament.table) {
-        this.tournament.table.filter(table => table.team === team.originalName).forEach(table => 
-          {
-            table.team = team.name;
-            table.league = team.league;
-          });
+        this.tournament.table.filter(table => table.team === team.originalName).forEach(table => {
+          table.team = team.name;
+          table.league = team.league;
+        });
       }
       if (this.tournament.tournamentSchedule) {
         this.tournament.tournamentSchedule.forEach(round => {
@@ -108,6 +107,11 @@ export class ModeComponent {
     if (teams.length > 0) {
       this.generateRoundRobinTournamentSchedule(teams);
       this.shuffleLeague();
+    }
+    if (this.tournament.classificationMode === 'semifinal') {
+      this.createEmptyRounds(1, 2);
+    } else if (this.tournament.classificationMode === 'final') {
+      this.createEmptyRounds(1, 1);
     }
     this.insertTable();
   }
@@ -193,22 +197,31 @@ export class ModeComponent {
     }
   }
 
-  private createEmptyRounds(roundNumber: number): void {
-    const prevRound = this.tournament.tournamentSchedule.find(round => round.roundNumber === roundNumber - 1);
+  private createEmptyRounds(roundNumber: number, numberGames?: number): void {
+    if (!this.tournament.tournamentSchedule) {
+      this.tournament.tournamentSchedule = [];
+    }
+    const prevRound = this.tournament.tournamentSchedule.find(round => round.roundNumber === roundNumber - 1);;
     let schedule: Schedule[] = [];
 
-    for (let i = 0; i < prevRound.schedule.length / 2; i++) {
-      let team1 = '';
-      let team2 = '';
-      let index = i * 2;
-      if (this.tournament.tournamentSchedule[0].schedule[index].team2 === 'Freilos') {
-        team1 = this.tournament.tournamentSchedule[0].schedule[index].team1;
+    if (prevRound) {
+      for (let i = 0; i < prevRound.schedule.length / 2; i++) {
+        let team1 = '';
+        let team2 = '';
+        let index = i * 2;
+        if (this.tournament.tournamentSchedule[0].schedule[index].team2 === 'Freilos') {
+          team1 = this.tournament.tournamentSchedule[0].schedule[index].team1;
+        }
+        index++;
+        if (this.tournament.tournamentSchedule[0].schedule[index].team2 === 'Freilos') {
+          team2 = this.tournament.tournamentSchedule[0].schedule[index].team1;
+        }
+        schedule.push(new Schedule(team1, team2));
       }
-      index++;
-      if (this.tournament.tournamentSchedule[0].schedule[index].team2 === 'Freilos') {
-        team2 = this.tournament.tournamentSchedule[0].schedule[index].team1;
+    } else {
+      for (let i = 0; i < numberGames; i++) {
+        schedule.push(new Schedule('', ''));
       }
-      schedule.push(new Schedule(team1, team2));
     }
     this.tournament.tournamentSchedule.push(new Round(roundNumber, schedule));
     if (schedule.length > 1) {

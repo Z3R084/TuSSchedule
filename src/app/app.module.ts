@@ -16,6 +16,7 @@ import { ModeComponent } from './admin/mode/mode.component';
 import { RoundRobinComponent } from './schedule/roundRobin/roundRobin.component';
 import { TournamentComponent } from './schedule/tournament/tournament.component';
 import { MessagesComponent } from './messages/messages.component';
+import { TournamentRoundsComponent } from './schedule/tournamentRounds/tournament-rounds.component';
 
 import { MemoryService } from './memory.service';
 import { TournamentService } from './services/tournament.service';
@@ -39,6 +40,7 @@ import { MessageService } from './services/message.service';
     ModeComponent,
     RoundRobinComponent,
     TournamentComponent,
+    TournamentRoundsComponent,
     MessagesComponent
   ],
   providers: [
