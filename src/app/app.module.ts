@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { NgxAutoScroll } from 'ngx-auto-scroll/lib/ngx-auto-scroll.directive';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -41,7 +42,8 @@ import { MessageService } from './services/message.service';
     RoundRobinComponent,
     TournamentComponent,
     TournamentRoundsComponent,
-    MessagesComponent
+    MessagesComponent,
+    NgxAutoScroll
   ],
   providers: [
     MemoryService,

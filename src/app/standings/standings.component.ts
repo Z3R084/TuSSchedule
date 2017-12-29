@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { TournamentService } from '../services/tournament.service';
 import { Table } from '../models/table';
@@ -14,6 +14,7 @@ export class StandingsComponent implements OnInit {
   timer: any;
   showSchedule: boolean = false;
   tournament: Tournament;
+  scrollBarHeight: number;
 
   constructor(private tournamentService: TournamentService) { }
 
