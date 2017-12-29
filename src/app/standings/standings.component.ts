@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { TournamentService } from '../services/tournament.service';
 import { Table } from '../models/table';
+import { Tournament } from '../models/tournament';
 
 @Component({
   selector: 'tus-standings',
@@ -12,6 +13,7 @@ export class StandingsComponent implements OnInit {
   standingsLeague2: Table[];
   timer: any;
   showSchedule: boolean = false;
+  tournament: Tournament;
 
   constructor(private tournamentService: TournamentService) { }
 
@@ -28,6 +30,7 @@ export class StandingsComponent implements OnInit {
           this.standingsLeague2 = null;
         }
       }
+      this.tournament = tournament;
     });
   }
 
@@ -40,5 +43,8 @@ export class StandingsComponent implements OnInit {
   endTimer(): void {
     clearInterval(this.timer);
     this.timer = null;
+    if (this.showSchedule) {
+      this.showSchedule = false;
+    }
   }
  }
