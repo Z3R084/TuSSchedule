@@ -16,9 +16,9 @@
     <table class="table table-striped" *ngIf="tournament.schedule && shownSchedule === null">
       <tr *ngFor="let game of tournament.schedule; index as i" [hidden]="game.team1 === 'Spielfrei' || game.team2 === 'Spielfrei'">
         <td *ngIf="multiLeague">Liga {{ game.league }}</td>
-        <td class="test">{{ game.team1 }}</td>
+        <td class="qdt-bold">{{ game.team1 }}</td>
         <td>-</td>
-        <td>{{ game.team2 }}</td>
+        <td class="qdt-bold">{{ game.team2 }}</td>
         <td class="form-inline">
           <input name="input-1-{{i}}" [(ngModel)]="game.goals1" class="form-control" type="text" /> :
           <input name="input-2-{{i}}" [(ngModel)]="game.goals2" class="form-control" type="text" />
@@ -27,9 +27,9 @@
     </table>
     <table class="table table-striped" *ngIf="tournament.tournamentSchedule && shownSchedule !== null">
       <tr *ngFor="let game of shownSchedule.schedule; index as i">
-        <td class="test">{{ game.team1 }}</td>
+        <td class="qdt-bold">{{ game.team1 }}</td>
         <td>-</td>
-        <td>{{ game.team2 }}</td>
+        <td class="qdt-bold">{{ game.team2 }}</td>
         <td class="form-inline" *ngIf="game.team2 !== 'Freilos'">
           <input name="input-1-{{i}}" [(ngModel)]="game.goals1" class="form-control" type="text" /> :
           <input name="input-2-{{i}}" [(ngModel)]="game.goals2" class="form-control" type="text" />

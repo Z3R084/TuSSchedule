@@ -1,6 +1,7 @@
 input[type="text"] {
   width: 50px;
   margin: 0 4px;
+  font-weight: bold;
 }
 
 button[type="submit"] {
@@ -14,4 +15,8 @@ button[type="submit"] {
 .nav-link {
   color: #007bff;
   cursor: pointer;
+}
+
+.qdt-bold {
+  font-weight: bold !important;
 }

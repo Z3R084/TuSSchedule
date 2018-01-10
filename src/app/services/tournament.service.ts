@@ -114,18 +114,68 @@ export class TournamentService {
     }
   }
 
-  private updateStandings(schedule: Schedule[], originalSchedule: Schedule[]): void {
-    schedule.forEach((game, index) => {
-      let standingEntry1 = this._tournament.table.find(team => team.team === game.team1);
-      let standingEntry2 = this._tournament.table.find(team => team.team === game.team2);
-      this.converToInt(game);
-      if (game.goals1 && game.goals2 && !game.saved) {
-        game.saved = true;
-        this.updateStanding(game, standingEntry1, standingEntry2);
-      } else if (game.goals1 && game.goals2 && game.saved) {
-        this.updateEntry(game, originalSchedule[index], standingEntry1, standingEntry2);
-      }
+  private calcTable(): void {
+    this._tournament.table.forEach((entry, index) => {
+      entry.drawn = 0;
+      entry.goalsAgainst = 0;
+      entry.goalsFor = 0;
+      entry.won = 0;
+      entry.lost = 0;
+      entry.points = 0;
+
+      const t = this._tournament.schedule.filter(game => game.team1 === entry.team);
+      t.forEach((game, index) => {
+        if (game.goals1 !== null && game.goals2 !== null) {
+          this.converToInt(game);
+          if (game.goals1 > game.goals2) {
+            entry.won++;
+            entry.points += 3;
+          } else if (game.goals1 === game.goals2) {
+            entry.drawn++;
+            entry.points += 1;
+          } else {
+            entry.lost++;
+          }
+
+          entry.goalsFor += game.goals1;
+          entry.goalsAgainst += game.goals2;
+        }
+      });
+
+      const t1 = this._tournament.schedule.filter(game => game.team2 === entry.team);
+      t1.forEach((game, index) => {
+        if (game.goals1 !== null && game.goals2 !== null) {
+          this.converToInt(game);
+          if (game.goals2 > game.goals1) {
+            entry.won++;
+            entry.points += 3;
+          } else if(game.goals2 === game.goals1) {
+            entry.drawn++;
+            entry.points += 1;
+          } else {
+            entry.lost++;
+          }
+
+          entry.goalsFor += game.goals2;
+          entry.goalsAgainst += game.goals1;
+        }
+      });
     });
+  }
+
+  private updateStandings(schedule: Schedule[], originalSchedule: Schedule[]): void {
+    this.calcTable();
+    // schedule.forEach((game, index) => {
+    //   let standingEntry1 = this._tournament.table.find(team => team.team === game.team1);
+    //   let standingEntry2 = this._tournament.table.find(team => team.team === game.team2);
+    //   this.converToInt(game);
+    //   if (game.goals1 && game.goals2 && !game.saved) {
+    //     game.saved = true;
+    //     this.updateStanding(game, standingEntry1, standingEntry2);
+    //   } else if (game.goals1 && game.goals2 && game.saved) {
+    //     this.updateEntry(game, originalSchedule[index], standingEntry1, standingEntry2);
+    //   }
+    // });
   }
 
   private converToInt(game: Schedule): void {
