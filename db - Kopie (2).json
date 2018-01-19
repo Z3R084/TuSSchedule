@@ -157,16 +157,16 @@
           "team2": "Team Behrens",
           "league": 1,
           "saved": false,
-          "goals1": 1,
-          "goals2": 3
+          "goals1": null,
+          "goals2": null
         },
         {
           "team1": "Team Neumann",
           "team2": "Team Fromm",
           "league": 1,
           "saved": false,
-          "goals1": 2,
-          "goals2": 1
+          "goals1": null,
+          "goals2": null
         },
         {
           "team1": "Team Quast",
@@ -181,8 +181,8 @@
           "team2": "Team Fromm",
           "league": 1,
           "saved": false,
-          "goals1": 4,
-          "goals2": 1
+          "goals1": null,
+          "goals2": null
         },
         {
           "team1": "Team Behrens",
@@ -197,8 +197,8 @@
           "team2": "Team Quast",
           "league": 1,
           "saved": false,
-          "goals1": 5,
-          "goals2": 1
+          "goals1": null,
+          "goals2": null
         },
         {
           "team1": "Team Becker",
@@ -213,24 +213,24 @@
           "team2": "Team Quast",
           "league": 1,
           "saved": false,
-          "goals1": 4,
-          "goals2": 3
+          "goals1": null,
+          "goals2": null
         },
         {
           "team1": "Team Behrens",
           "team2": "Team Neumann",
           "league": 1,
           "saved": false,
-          "goals1": 5,
-          "goals2": 2
+          "goals1": null,
+          "goals2": null
         },
         {
           "team1": "Team Becker",
           "team2": "Team Quast",
           "league": 1,
           "saved": false,
-          "goals1": 6,
-          "goals2": 2
+          "goals1": null,
+          "goals2": null
         },
         {
           "team1": "Spielfrei",
@@ -245,24 +245,24 @@
           "team2": "Team Behrens",
           "league": 1,
           "saved": false,
-          "goals1": 1,
-          "goals2": 6
+          "goals1": null,
+          "goals2": null
         },
         {
           "team1": "Team Becker",
           "team2": "Team Neumann",
           "league": 1,
           "saved": false,
-          "goals1": 3,
-          "goals2": 3
+          "goals1": null,
+          "goals2": null
         },
         {
           "team1": "Team Quast",
           "team2": "Team Behrens",
           "league": 1,
           "saved": false,
-          "goals1": 3,
-          "goals2": 5
+          "goals1": null,
+          "goals2": null
         },
         {
           "team1": "Spielfrei",
@@ -278,51 +278,51 @@
           "team": "Team Quast",
           "league": 1,
           "won": 0,
-          "lost": 8,
+          "lost": 1,
           "drawn": 0,
-          "goalsFor": 11,
-          "goalsAgainst": 27,
+          "goalsFor": 2,
+          "goalsAgainst": 3,
           "points": 0
         },
         {
           "team": "Team Behrens",
           "league": 1,
-          "won": 7,
+          "won": 1,
           "lost": 1,
           "drawn": 0,
-          "goalsFor": 33,
-          "goalsAgainst": 10,
-          "points": 21
+          "goalsFor": 6,
+          "goalsAgainst": 3,
+          "points": 3
         },
         {
           "team": "Team Neumann",
           "league": 1,
-          "won": 5,
-          "lost": 1,
-          "drawn": 2,
-          "goalsFor": 23,
-          "goalsAgainst": 16,
-          "points": 17
+          "won": 3,
+          "lost": 0,
+          "drawn": 1,
+          "goalsFor": 11,
+          "goalsAgainst": 6,
+          "points": 10
         },
         {
           "team": "Team Fromm",
           "league": 1,
-          "won": 2,
-          "lost": 4,
+          "won": 0,
+          "lost": 1,
           "drawn": 2,
-          "goalsFor": 12,
-          "goalsAgainst": 23,
-          "points": 8
+          "goalsFor": 4,
+          "goalsAgainst": 8,
+          "points": 2
         },
         {
           "team": "Team Becker",
           "league": 1,
-          "won": 3,
-          "lost": 3,
-          "drawn": 2,
-          "goalsFor": 17,
-          "goalsAgainst": 20,
-          "points": 11
+          "won": 0,
+          "lost": 1,
+          "drawn": 1,
+          "goalsFor": 2,
+          "goalsAgainst": 5,
+          "points": 1
         }
       ],
       "tournamentSchedule": null
